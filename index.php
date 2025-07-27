@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Require toàn bộ các file khai báo môi trường, thực thi,...(không require view)
 
 // Require file Common
@@ -9,16 +9,17 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/ProductController.php';
 
 // Require toàn bộ file Models
+
 require_once './models/ProductModel.php';
 
+
 // Route
-$act = $_GET['act'] ?? '/';
+$action = $_GET['act'] ?? '/';
 
 
 // Để bảo bảo tính chất chỉ gọi 1 hàm Controller để xử lý request thì mình sử dụng match
 
-match ($act) {
+match ($action) {
     // Trang chủ
-    '/'=>(new ProductController())->Home(),
-
+    '/' => (new ProductController())->home(),
 };
