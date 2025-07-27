@@ -12,3 +12,4 @@ define('DB_PASSWORD', '');
 define('DB_NAME', 'web2041_ph59534');  // Tên database
 
 define('PATH_ROOT', __DIR__ . '/../');
+?>
