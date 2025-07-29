@@ -1,0 +1,146 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+header {
+  width: 100%;
+  height: 60px;
+  border-bottom: 2px solid #07484a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header ul {
+  display: flex;
+  list-style: none;
+}
+header ul li {
+  padding: 0 18px;
+}
+header ul li a {
+  text-decoration: none;
+  color: #07484a;
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+}
+.SCU {
+  display: flex;
+  gap: 58px;
+}
+.header-bar {
+  padding: 0 150px;
+  display: flex;
+  justify-content: space-around;
+  gap: 140px;
+  align-items: center;
+}
+.banner {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  border-radius: 0 0 62px 62px;
+  opacity: 0.4;
+}
+.head-line {
+  width: 780px;
+  height: 392px;
+  position: absolute;
+  left: 150px;
+  top: 150px;
+}
+.title-banner {
+  width: 700px;
+  height: 170px;
+  font-size: 64px;
+  font-weight: bold;
+  color: #07484a;
+  font-family: "Playfair Display", serif;
+  margin: 0;
+}
+.slogan {
+  width: 100%;
+  height: 32px;
+  font-size: 24px;
+  color: #07484a;
+  font-family: "Playfair Display", serif;
+  margin: 55px 0;
+}
+.button-banner {
+  box-sizing: border-box;
+  width: 230px;
+  height: 80px;
+  padding: 20px;
+  font-size: 24px;
+  background-color: #70908b;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.button-banner a {
+  text-decoration: none;
+  color: #fdfbf8;
+}
+.content-box {
+  height: 100%;
+  padding: 20px 0;
+  margin: 0 50px;
+}
+.content-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 64px;
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+  color: #07484a;
+}
+.content-item-box {
+  display: flex;
+  gap: 32px;
+}
+.content-item {
+  width: 100%;
+  height: 100%;
+  border: #07484a solid 1px;
+  border-radius: 16px;
+  padding: 60px 40px;
+  margin: 54px 0;
+}
+.content-item img {
+  width: 100%;
+  height: 279px;
+  background-color: aqua;
+  margin-bottom: 40px;
+}
+.content-item .price {
+  display: flex;
+}
+.content-item .price p {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Roboto Mono", sans-serif;
+}
+.price-value {
+  margin-left: 10px;
+  color: #ff0000;
+}
+.button-more-box {
+  display: flex;
+  justify-content: center;
+}
+.button-more {
+  width: 265px;
+  height: 72px;
+  padding: 20px 24px;
+  border: none;
+  border-radius: 10px;
+  background-color: #70908b;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Playfair Display", serif;
+}
