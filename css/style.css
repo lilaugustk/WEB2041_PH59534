@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+/* Header CSS */
 header {
   width: 100%;
   height: 60px;
@@ -84,6 +85,9 @@ header ul li a {
   text-decoration: none;
   color: #fdfbf8;
 }
+/* Header CSS */
+
+/* Content Home Page CSS */
 .content-box {
   height: 100%;
   padding: 20px 0;
@@ -144,3 +148,134 @@ header ul li a {
   font-weight: bold;
   font-family: "Playfair Display", serif;
 }
+/* Content Home Page CSS */
+
+/* New Letter CSS */
+.new-letter-box {
+  width: 100%;
+  height: 600px;
+  background-color: #e0f6f1;
+  display: flex;
+}
+.new-letter-box img {
+  width: 30%;
+  height: 600px;
+}
+.new-letter-content-box {
+  width: 70%;
+  height: 100%;
+  padding: 0 150px;
+  display: flex;
+  align-items: center;
+}
+
+.new-letter-content-text {
+  color: #07484a;
+  margin-bottom: 40px;
+}
+.new-letter-content-text p:first-child {
+  font-size: 48px;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 25px;
+}
+.new-letter-content-text p:last-child {
+  font-size: 24px;
+  font-family: "Roboto", serif;
+}
+.new-letter-email-form input {
+  width: 708px;
+  height: 60px;
+  border: 1px solid #07484a;
+  border-radius: 30px;
+  color: #c4c4c4;
+  font-size: 18px;
+  font-family: "Roboto", serif;
+  padding: 20px;
+  margin-bottom: 40px;
+  background-color: #e0f6f1;
+}
+.new-letter-email-form input:focus {
+  color: #000000;
+}
+.new-letter-email-button {
+  width: 250px;
+  height: 70px;
+  border: none;
+  border-radius: 6px;
+  background-color: #70908b;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: "Roboto", serif;
+  cursor: pointer;
+}
+/* New Letter CSS */
+
+/* Footer CSS */
+footer {
+  width: 100%;
+  height: 400px;
+  background-color: #f3f6f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 60px;
+  padding: 100px 150px 32px 150px;
+  font-family: "Roboto", serif;
+  color: #07484a;
+}
+.content-footer-center-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.detail-footer-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 21px;
+}
+.logo-footer {
+  width: 137px;
+  height: 36px;
+  cursor: pointer;
+}
+.icon-footer {
+  display: flex;
+  gap: 36px;
+}
+.info-footer-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.info-footer-detail-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.info-list-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.info-title {
+  font-weight: bold;
+}
+.info-list-box a {
+  text-decoration: none;
+  color: #07484a;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #07484a;
+  font-family: "Roboto", serif;
+}
+/* Footer CSS */
