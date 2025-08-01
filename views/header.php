@@ -18,7 +18,7 @@
                     <a href="">Trang Chủ</a>
                 </li>
                 <li>
-                    <a href="">Sản Phẩm</a>
+                    <a href="?act=category">Sản Phẩm</a>
                 </li>
                 <li>
                     <a href="">Giới Thiệu</a>

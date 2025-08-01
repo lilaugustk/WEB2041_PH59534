@@ -22,6 +22,9 @@ $action = $_GET['act'] ?? '/';
 match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
+    // Trang danh mục sản phẩm
+    'category' => (new ProductController())->category(),
+
     // Trang đăng ký
     'register' => (new ProductController())->register(),
     // Trang đăng nhập

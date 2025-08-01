@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiny Room</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="js/script.js"></script>
 </head>
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-<link rel="stylesheet" href="styles/style.css">
-<script src="js/script.js"></script>
 
 <body>
     <div class="container">
@@ -22,15 +21,15 @@
             </div>
         </div>
         <article>
-            <div class="content-title">Sản Phẩm Hot</div>
+            <div class="content-title">Tên Danh Mục</div>
             <div class="product-box" id="product-slideshow">
-                <?php foreach ($hotListProducts as $index => $hotProduct) { ?>
+                <?php foreach ($listProducts as $index => $product) { ?>
                     <div class="content-item slide-item" data-index="<?= $index ?>">
                         <img src="img/Banner.jpg" alt="notfound">
-                        <p class="name"><?= $hotProduct["product_name"] ?></p>
+                        <p class="name"><?= $product["product_name"] ?></p>
                         <span class="price">
                             <p>Giá:</p>
-                            <p class="price-value"><?= number_format($hotProduct["price"]) ?> VNĐ</p>
+                            <p class="price-value"><?= number_format($product["price"]) ?> VNĐ</p>
                         </span>
                     </div>
                 <?php } ?>
@@ -47,9 +46,9 @@
             </div>
     </div>
     </article>
-    <?php include 'views/new-letter.php'; ?>
     <?php include 'views/footer.php'; ?>
     </div>
 </body>
+
 
 </html>
