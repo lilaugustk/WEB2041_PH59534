@@ -16,4 +16,13 @@ class ProductModel
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getProductByHot($hot)
+    {
+        $sql = "SELECT * FROM `products` WHERE `hot` = :hot";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':hot', $hot, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

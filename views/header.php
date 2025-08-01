@@ -28,7 +28,8 @@
                 </li>
             </ul>
             <div class="SCU">
-                <img src="img/Search.svg" alt="notfound">
+                <a href="?act=login"> <img src="img/Search.svg" alt="notfound">
+                </a>
                 <img src="img/Cart.svg" alt="notfound">
                 <img src="img/User.svg" alt="notfound">
             </div>

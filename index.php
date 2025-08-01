@@ -22,4 +22,9 @@ $action = $_GET['act'] ?? '/';
 match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
+    // Trang đăng ký
+    'register' => (new ProductController())->register(),
+    // Trang đăng nhập
+    'login' => (new ProductController())->register(), // Giả sử đăng nhập cũng 'register' view
+    // Mặc định nếu không có action nào khớp thì sẽ gọi trang chủ
 };
