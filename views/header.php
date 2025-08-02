@@ -12,10 +12,10 @@
 <body>
     <header>
         <div class="header-bar">
-            <div class="logo"><img src="img/Logo.png" alt="notfound"></div>
+            <div class="logo"><a href="?act=/"><img src="img/Logo.png" alt="notfound"></a></div>
             <ul>
                 <li>
-                    <a href="">Trang Chủ</a>
+                    <a href="?act=/">Trang Chủ</a>
                 </li>
                 <li>
                     <a href="?act=category">Sản Phẩm</a>

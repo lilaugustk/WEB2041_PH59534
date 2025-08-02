@@ -13,6 +13,7 @@
 <body>
     <div class="container">
         <?php include 'views/header.php'; ?>
+        <!-- Banner -->
         <div class="box-banner">
             <img src="img/Banner.jpg" alt="" class="banner">
             <div class="head-line">
@@ -21,7 +22,9 @@
                 <div class="button-banner"><a href="about.php">Tìm Hiểu Ngay</a></div>
             </div>
         </div>
+        <!-- Banner -->
         <article>
+            <!-- Sản Phẩm Hot -->
             <div class="content-title">Sản Phẩm Hot</div>
             <div class="product-box" id="product-slideshow">
                 <?php foreach ($hotListProducts as $index => $hotProduct) { ?>
@@ -45,8 +48,30 @@
             </div>
             <div class="button-more-box"><button class="button-more">Khám Phá</button>
             </div>
+            <!-- Sản Phẩm Hot -->
+
+            <!-- Sản Phẩm Tiny Room -->
+            <div class="content-title">Sản Phẩm Tiny Room</div>
+            <div class="product-box product-box-tiny">
+                <?php foreach ($listProducts as $index => $product) {
+                    if ($index >= 9) break; ?>
+                    <div class="content-item" data-index="<?= $index ?>">
+                        <img src="img/Banner.jpg" alt="notfound">
+                        <p class="name"><?= $product["product_name"] ?></p>
+                        <span class="price">
+                            <p>Giá:</p>
+                            <p class="price-value"><?= number_format($product["price"]) ?> VNĐ</p>
+                        </span>
+                    </div>
+                <?php } ?>
+            </div>
+            <div class="button-more-box"><a href="?act=category"><button class="button-more">Khám Phá</button></a>
+            </div>
+            <!-- Sản Phẩm Tiny Room -->
+
+        </article>
     </div>
-    </article>
+
     <?php include 'views/new-letter.php'; ?>
     <?php include 'views/footer.php'; ?>
     </div>

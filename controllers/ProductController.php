@@ -11,6 +11,7 @@ class ProductController
 
     public function home()
     {
+        $listProducts  = $this->modelProduct->getAllProduct();
         $hot = true; // Giả sử ta muốn lấy sản phẩm hot
         // Lấy danh sách sản phẩm hot
         $hotListProducts  = $this->modelProduct->getProductByHot($hot);

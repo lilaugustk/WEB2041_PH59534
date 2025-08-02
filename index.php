@@ -24,7 +24,6 @@ match ($action) {
     '/' => (new ProductController())->home(),
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
-
     // Trang đăng ký
     'register' => (new ProductController())->register(),
     // Trang đăng nhập
