@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +15,7 @@
 
 <body>
     <div class="container">
-        <?php include 'views/header.php'; ?>
+        <?php include 'views/layouts/header.php'; ?>
         <!-- Banner -->
         <div class="box-banner">
             <img src="img/Banner.jpg" alt="" class="banner">
@@ -74,7 +76,7 @@
     </div>
 
     <?php include 'views/new-letter.php'; ?>
-    <?php include 'views/footer.php'; ?>
+    <?php include 'views/layouts/footer.php'; ?>
     </div>
 </body>
 

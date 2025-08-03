@@ -7,10 +7,13 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/ProductController.php';
+require_once './controllers/AuthController.php'; // Controller xử lý đăng nhập, đăng ký
 
 // Require toàn bộ file Models
 
 require_once './models/ProductModel.php';
+require_once './models/CategoryModel.php';
+require_once './models/UserModel.php'; // Model xử lý người dùng
 
 
 // Route
@@ -32,8 +35,10 @@ match ($action) {
     'mmeetingroom' => (new ProductController())->category(),
     'bathroom' => (new ProductController())->category(),
     // Trang đăng ký
-    'register' => (new ProductController())->register(),
+    'register' => (new AuthController())->register(),
     // Trang đăng nhập
-    'login' => (new ProductController())->register(), // Giả sử đăng nhập cũng 'register' view
+    'login' => (new AuthController())->login(),
+    // Trang đăng xuất
+    'logout' => (new AuthController())->logout(),
     // Mặc định nếu không có action nào khớp thì sẽ gọi trang chủ
 };
