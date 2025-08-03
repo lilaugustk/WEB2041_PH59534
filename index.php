@@ -24,7 +24,13 @@ match ($action) {
     '/' => (new ProductController())->home(),
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
-
+    'bedroom' => (new ProductController())->category(),
+    'diningroom' => (new ProductController())->category(),
+    'workingroom' => (new ProductController())->category(),
+    'livingroom' => (new ProductController())->category(),
+    'kitchen' => (new ProductController())->category(),
+    'mmeetingroom' => (new ProductController())->category(),
+    'bathroom' => (new ProductController())->category(),
     // Trang đăng ký
     'register' => (new ProductController())->register(),
     // Trang đăng nhập
