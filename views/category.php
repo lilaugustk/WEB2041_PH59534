@@ -11,8 +11,8 @@
 
 <body>
     <div class="container">
-        <?php include 'views/header.php'; ?>
-        <div class="box-banner">
+    <?php include 'views/layouts/header.php'; ?>
+    <div class="box-banner">
             <img src="img/Banner.jpg" alt="" class="banner">
             <div class="head-line">
                 <p class="title-banner">Kiến Tạo Không Gian Sống Của Bạn</p>
@@ -58,8 +58,7 @@
             </div>
     </div>
     </article>
-    <?php include 'views/footer.php'; ?>
-    </div>
+    <?php include 'views/layouts/footer.php'; ?>    </div>
 </body>
 
 

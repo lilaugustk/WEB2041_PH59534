@@ -8,6 +8,8 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 // Require toàn bộ file Controllers
 require_once './controllers/ProductController.php';
 require_once './controllers/AuthController.php'; // Controller xử lý đăng nhập, đăng ký
+require_once './controllers/DashboardController.php'; // Controller xử lý đăng nhập, đăng ký
+
 
 // Require toàn bộ file Models
 
@@ -25,6 +27,7 @@ $action = $_GET['act'] ?? '/';
 match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
+    'dashboard' => (new DashboardController())->index(),
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
     'bedroom' => (new ProductController())->category(),

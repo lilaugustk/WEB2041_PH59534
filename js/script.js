@@ -99,31 +99,32 @@ function initSlideshow(itemSelector, prevId, nextId, showCount = 3) {
       } else {
         current = items.length - showCount < 0 ? 0 : items.length - showCount;
       }
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener("click", function () {
-      if (current > 0) {
-        current--;
-      } else {
-        current = items.length - showCount < 0 ? 0 : items.length - showCount;
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", function () {
+          if (current > 0) {
+            current--;
+          } else {
+            current =
+              items.length - showCount < 0 ? 0 : items.length - showCount;
+          }
+          updateSlide();
+        });
+        nextBtn.addEventListener("click", function () {
+          if (current < items.length - showCount) {
+            current++;
+          } else {
+            current = 0;
+          }
+        });
+        nextBtn.addEventListener("click", function () {
+          if (current < items.length - showCount) {
+            current++;
+          } else {
+            current = 0;
+          }
+          updateSlide();
+        });
       }
-      updateSlide();
-    });
-    nextBtn.addEventListener("click", function () {
-      if (current < items.length - showCount) {
-        current++;
-      } else {
-        current = 0;
-      }
-    });
-    nextBtn.addEventListener("click", function () {
-      if (current < items.length - showCount) {
-        current++;
-      } else {
-        current = 0;
-      }
-      updateSlide();
-    });
-  }
     });
   }
   updateSlide();
