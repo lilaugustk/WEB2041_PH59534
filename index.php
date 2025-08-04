@@ -28,6 +28,19 @@ match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
     'dashboard' => (new DashboardController())->index(),
+    
+    // Dashboard routes
+    'products' => (new DashboardController())->products(),
+    'categories' => (new DashboardController())->categories(),
+    'add-product' => (new DashboardController())->addProduct(),
+    'add-category' => (new DashboardController())->addCategory(),
+    'edit-product' => (new DashboardController())->editProduct(),
+    'edit-category' => (new DashboardController())->editCategory(),
+    'save-product' => (new DashboardController())->saveProduct(),
+    'save-category' => (new DashboardController())->saveCategory(),
+    'delete-product' => (new DashboardController())->deleteProduct(),
+    'delete-category' => (new DashboardController())->deleteCategory(),
+    
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
     'bedroom' => (new ProductController())->category(),
@@ -37,11 +50,14 @@ match ($action) {
     'kitchen' => (new ProductController())->category(),
     'mmeetingroom' => (new ProductController())->category(),
     'bathroom' => (new ProductController())->category(),
+    
     // Trang đăng ký
     'register' => (new AuthController())->register(),
     // Trang đăng nhập
     'login' => (new AuthController())->login(),
     // Trang đăng xuất
     'logout' => (new AuthController())->logout(),
+    
     // Mặc định nếu không có action nào khớp thì sẽ gọi trang chủ
+    default => (new ProductController())->home(),
 };
