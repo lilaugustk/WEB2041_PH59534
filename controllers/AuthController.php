@@ -3,11 +3,13 @@ require_once './models/UserModel.php';
 
 class AuthController
 {
-    public $userModel;
+    // public $userModel;
+    public $modelUser;
+
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->modelUser = new UserModel();
     }
 
     //Xử lý đăng ký
@@ -31,7 +33,7 @@ class AuthController
             }
 
             // Kiểm tra email đã tồn tại chưa
-            if (!empty($email) && $this->userModel->emailExists($email)) {
+            if (!empty($email) && $this->modelUser->emailExists($email)) {
                 $errors[] = "Email đã tồn tại trong hệ thống";
             }
 
@@ -46,7 +48,7 @@ class AuthController
             }
 
             if (empty($errors)) {
-                $result = $this->userModel->createUser($user_name, $email, $password, $phone_number);
+                $result = $this->modelUser->createUser($user_name, $email, $password, $phone_number);
                 if ($result) {
                     header('Location: ?act=login');
                     exit;
@@ -77,7 +79,7 @@ class AuthController
             }
 
             if (empty($errors)) {
-                $user = $this->userModel->checkLogin($email, $password);
+                $user = $this->modelUser->checkLogin($email, $password);
 
                 if ($user) {
                     $this->setUserSession($user);

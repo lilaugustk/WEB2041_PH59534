@@ -23,25 +23,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=products">
+                        <a href="?act=productDashboard">
                             <i class="fas fa-box"></i>
                             <span>Sản phẩm</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=categories">
+                        <a href="?act=categoryDashboard">
                             <i class="fas fa-tags"></i>
                             <span>Danh mục</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=comments">
+                        <a href="?act=commentDashboard">
                             <i class="fas fa-comments"></i>
                             <span>Bình luận</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=users">
+                        <a href="?act=userDashboard">
                             <i class="fas fa-users"></i>
                             <span>Tài khoản</span>
                         </a>
@@ -80,7 +80,7 @@
                             <i class="fas fa-box"></i>
                         </div>
                         <div class="stat-info">
-                            <h3>24</h3>
+                            <h3><?= $totalData['totalProducts'] ?></h3>
                             <p>Sản phẩm</p>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                             <i class="fas fa-tags"></i>
                         </div>
                         <div class="stat-info">
-                            <h3>8</h3>
+                            <h3><?= $totalData['totalCategories'] ?></h3>
                             <p>Danh mục</p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-info">
-                            <h3>156</h3>
+                            <h3><?= $totalData['totalUsers'] ?></h3>
                             <p>Người dùng</p>
                         </div>
                     </div>

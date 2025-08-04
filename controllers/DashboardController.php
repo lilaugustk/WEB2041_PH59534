@@ -3,21 +3,46 @@ require_once './models/ProductModel.php';
 require_once './models/CategoryModel.php';
 require_once './models/UserModel.php';
 
+
 class DashboardController
 {
+    public $modelProduct;
+    public $modelCategory;
+    public $modelUser;
+    public function __construct()
+    {
+        $this->modelProduct = new ProductModel();
+        $this->modelCategory = new CategoryModel();
+        $this->modelUser = new UserModel();
+    }
     public function index()
     {
-        require_once './views/dashboard.php';
+        $productModel = new ProductModel();
+        $categoryModel = new CategoryModel();
+        $userModel = new UserModel();
+
+        $totalProducts = $productModel->countProducts();
+        $totalCategories = $categoryModel->countCategories();
+        $totalUsers = $userModel->countUsers();
+
+        $totalData = [
+            'totalProducts' => $totalProducts,
+            'totalCategories' => $totalCategories,
+            'totalUsers' => $totalUsers,
+        ];
+        require_once './views/dashboard/dashboard.php';
     }
 
-    public function products()
+    public function productDashboard()
     {
-        require_once './views/products.php';
+        $listProducts  = $this->modelProduct->getAllProduct();
+        require_once './views/dashboard/productDashboard.php';
     }
 
-    public function categories()
+    public function categoryDashboard()
     {
-        require_once './views/categories.php';
+        $listCategories = $this->modelCategory->getAllCategories();
+        require_once './views/dashboard/categoryDashboard.php';
     }
 
     public function addProduct()

@@ -79,5 +79,11 @@ class UserModel
             return false;
         }
     }
-
+    public function countUsers()
+    {
+        $sql = "SELECT COUNT(*) FROM `users`";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 }

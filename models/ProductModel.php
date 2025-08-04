@@ -35,4 +35,12 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+
+        public function countProducts()
+        {
+            $sql = "SELECT COUNT(*) FROM `products`";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        }
     }

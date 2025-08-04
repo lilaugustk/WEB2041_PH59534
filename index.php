@@ -30,8 +30,8 @@ match ($action) {
     'dashboard' => (new DashboardController())->index(),
     
     // Dashboard routes
-    'products' => (new DashboardController())->products(),
-    'categories' => (new DashboardController())->categories(),
+    'productDashboard' => (new DashboardController())->productDashboard(),
+    'categoryDashboard' => (new DashboardController())->categoryDashboard(),
     'add-product' => (new DashboardController())->addProduct(),
     'add-category' => (new DashboardController())->addCategory(),
     'edit-product' => (new DashboardController())->editProduct(),
