@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm sản phẩm - Admin Dashboard</title>
+    <title>Sửa sản phẩm - Admin Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -63,7 +63,7 @@
             <!-- Header -->
             <header class="content-header">
                 <div class="header-left">
-                    <h1>Chỉnh sửa sản phẩm</h1>
+                    <h1>Sửa sản phẩm</h1>
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
@@ -76,20 +76,59 @@
             <!-- Content Area -->
             <div class="content-area">
                 <div class="form-container">
-                    <form action="?act=save-category" method="POST" enctype="multipart/form-data" class="admin-form">
+                    <form action="?act=update-product" method="POST" enctype="multipart/form-data" class="admin-form">
+                        <input type="hidden" name="product_id" value="<?= htmlspecialchars($editProduct['product_id'] ?? '') ?>">
+                        <input type="hidden" name="current_image" value="<?= htmlspecialchars($editProduct['image'] ?? '') ?>">
                         <div class="form-group">
-                            <label for="category_name">Tên danh mục *</label>
-                            <input type="text" id="category_name" name="category_name" required>
+                            <label for="product_name">Tên sản phẩm</label>
+                            <input type="text" id="product_name" name="product_name" value="<?= htmlspecialchars($editProduct['product_name'] ?? '') ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Mô tả</label>
+                            <textarea id="description" name="description" rows="4"><?= htmlspecialchars($editProduct['description'] ?? '') ?></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Giá</label>
+                                <input type="number" id="price" name="price" value="<?= htmlspecialchars($editProduct['price'] ?? '') ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Số lượng</label>
+                                <input type="number" id="quantity" name="quantity" value="<?= htmlspecialchars($editProduct['quantity'] ?? '') ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_id">Danh mục</label>
+                                <select id="category_id" name="category_id" required>
+                                    <option value="">Chọn Danh Mục</option>
+                                    <?php foreach ($listCategories as $category) : ?>
+                                        <option value="<?= htmlspecialchars($category['category_id']) ?>" <?= ($editProduct['category_id'] == $category['category_id']) ? 'selected' : '' ?>>
+                                            <?= htmlspecialchars($category['category_name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group"> <label for="hot">Sản phẩm hot</label>
+                                <input type="checkbox" id="hot" name="hot" class="hot-product-checkbox" value="1" <?= ($editProduct['hot'] == 1) ? 'checked' : '' ?>>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Hình ảnh mới (để trống nếu không muốn thay đổi)</label>
+                            <input type="file" id="image" name="image" accept="image/*">
+                            <?php if (!empty($editProduct['image'])) : ?>
+                                <p>Ảnh hiện tại: <img src="<?= htmlspecialchars($editProduct['image']) ?>" alt="Current Image" style="width: 100px; height: auto; margin-top: 10px;"></p>
+                            <?php endif; ?>
                         </div>
                 </div>
                 <div class=" form-actions">
-                    <a href="?act=categoryDashboard" class="btn btn-secondary">
+                    <a href="?act=productDashboard" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         Quay lại
                     </a>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i>
-                        Lưu danh mục
+                        Lưu thay đổi
                     </button>
                 </div>
                 </form>

@@ -44,6 +44,7 @@ match ($action) {
     // Xử lý lưu sản phẩm, danh mục
     'save-product' => (new DashboardController())->saveProduct(),
     'save-category' => (new DashboardController())->saveCategory(),
+    'update-product' => (new DashboardController())->updateProduct(),
 
     // Xử lý xóa sản phẩm, danh mục
     'delete-product' => (new DashboardController())->deleteProduct(),

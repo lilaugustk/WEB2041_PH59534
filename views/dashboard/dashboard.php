@@ -80,7 +80,7 @@
                             <i class="fas fa-box"></i>
                         </div>
                         <div class="stat-info">
-                            <h3><?= $totalData['totalProducts'] ?></h3>
+                            <h3><?= htmlspecialchars($totalData['totalProducts'] ?? 0) ?></h3>
                             <p>Sản phẩm</p>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                             <i class="fas fa-tags"></i>
                         </div>
                         <div class="stat-info">
-                            <h3><?= $totalData['totalCategories'] ?></h3>
+                            <h3><?= htmlspecialchars($totalData['totalCategories'] ?? 0) ?></h3>
                             <p>Danh mục</p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-info">
-                            <h3><?= $totalData['totalUsers'] ?></h3>
+                            <h3><?= htmlspecialchars($totalData['totalUsers'] ?? 0) ?></h3>
                             <p>Người dùng</p>
                         </div>
                     </div>

@@ -99,20 +99,20 @@
                         <?php foreach ($listProducts as $product) { ?>
                             <tbody>
                                 <tr>
-                                    <td><?= $product['product_id'] ?></td>
+                                    <td><?= htmlspecialchars($product['product_id']) ?></td>
                                     <td>
-                                        <img src="<?= $product['image'] ?>" alt="Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                                        <img src="<?= htmlspecialchars($product['image']) ?>" alt="Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                                     </td>
-                                    <td><?= $product['product_name'] ?></td>
-                                    <td><?= $product['category_name'] ?></td>
-                                    <td><?= $product['price'] ?></td>
-                                    <td><?= $product['quantity'] ?></td>
+                                    <td><?= htmlspecialchars($product['product_name']) ?></td>
+                                    <td><?= htmlspecialchars($product['category_name']) ?></td>
+                                    <td><?= htmlspecialchars($product['price']) ?></td>
+                                    <td><?= htmlspecialchars($product['quantity']) ?></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="?act=edit-product&id=<?= $product['product_id'] ?>" class="btn btn-sm btn-success">
+                                            <a href="?act=edit-product&id=<?= htmlspecialchars($product['product_id']) ?>" class="btn btn-sm btn-success">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="?act=delete-product&id=<?= $product['product_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                            <a href="?act=delete-product&id=<?= htmlspecialchars($product['product_id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>

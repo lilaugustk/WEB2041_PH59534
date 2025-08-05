@@ -101,7 +101,9 @@
                                 <select id="category_id" name="category_id" required>
                                     <option value="">Chọn Danh Mục</option>
                                     <?php foreach ($listCategories as $category) { ?>
-                                        <option value="<?= $category['category_id'] ?>"><?= $category['category_name'] ?></option>
+                                        <option value="<?= htmlspecialchars($category['category_id']) ?>">
+                                            <?= htmlspecialchars($category['category_name']) ?>
+                                        </option>
                                     <?php } ?>
                                 </select>
                             </div>

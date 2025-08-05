@@ -49,21 +49,6 @@ class DashboardController
         require_once './views/dashboard/add-product.php';
     }
 
-    public function addCategory()
-    {
-        require_once './views/dashboard/add-category.php';
-    }
-
-    public function editProduct()
-    {
-        require_once './views/edit-product.php';
-    }
-
-    public function editCategory()
-    {
-        require_once './views/edit-category.php';
-    }
-
     public function saveProduct()
     {
         $productName = $_POST['product_name'];
@@ -78,6 +63,10 @@ class DashboardController
         header('Location: ?act=productDashboard');
         exit;
     }
+    public function addCategory()
+    {
+        require_once './views/dashboard/add-category.php';
+    }
 
     public function saveCategory()
     {
@@ -87,6 +76,51 @@ class DashboardController
         header('Location: ?act=categoryDashboard');
         exit;
     }
+    public function editProduct()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: ?act=productDashboard');
+            exit;
+        }
+        $editProduct = $this->modelProduct->getProductById($id);
+        $listCategories = $this->modelCategory->getAllCategories(); // Lấy danh sách danh mục
+
+        if (!$editProduct) {
+            // Xử lý trường hợp không tìm thấy sản phẩm
+            echo "Sản phẩm không tồn tại!";
+            exit;
+        }
+
+        require_once './views/dashboard/edit-product.php';
+    }
+
+    public function editCategory()
+    {
+        require_once './views/dashboard/edit-category.php';
+    }
+
+    public function updateProduct()
+    {
+        $productId = $_POST['product_id'];
+        $productName = $_POST['product_name'];
+        $productPrice = $_POST['price'];
+        $productQuantity = $_POST['quantity'];
+        $productDescription = $_POST['description'];
+        $productCategory = $_POST['category_id'];
+        $hot = isset($_POST['hot']) ? 1 : 0;
+        $productImage = $_POST['current_image']; // Giữ ảnh cũ làm mặc định
+
+        // Kiểm tra xem có file ảnh mới được tải lên không
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            // Có thể thêm logic xóa file ảnh cũ ở đây nếu cần
+            $productImage = uploadFile($_FILES['image'], 'imgproduct');
+        }
+        $this->modelProduct->updateProduct($productId, $productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
+        header('Location: ?act=productDashboard');
+        exit;
+    }
+
 
     public function deleteProduct()
     {
