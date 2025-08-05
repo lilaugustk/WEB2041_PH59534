@@ -32,12 +32,20 @@ match ($action) {
     // Dashboard routes
     'productDashboard' => (new DashboardController())->productDashboard(),
     'categoryDashboard' => (new DashboardController())->categoryDashboard(),
+
+    // Thêm sản phẩm, danh mục
     'add-product' => (new DashboardController())->addProduct(),
     'add-category' => (new DashboardController())->addCategory(),
+
+    // Chỉnh sửa sản phẩm, danh mục
     'edit-product' => (new DashboardController())->editProduct(),
     'edit-category' => (new DashboardController())->editCategory(),
+
+    // Xử lý lưu sản phẩm, danh mục
     'save-product' => (new DashboardController())->saveProduct(),
     'save-category' => (new DashboardController())->saveCategory(),
+
+    // Xử lý xóa sản phẩm, danh mục
     'delete-product' => (new DashboardController())->deleteProduct(),
     'delete-category' => (new DashboardController())->deleteCategory(),
     

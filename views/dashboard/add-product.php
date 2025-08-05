@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -23,25 +25,25 @@
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a href="?act=products">
+                        <a href="?act=productDashboard">
                             <i class="fas fa-box"></i>
                             <span>Sản phẩm</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=categories">
+                        <a href="?act=categoryDashboard">
                             <i class="fas fa-tags"></i>
                             <span>Danh mục</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=comments">
+                        <a href="?act=commentDashboard">
                             <i class="fas fa-comments"></i>
                             <span>Bình luận</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=users">
+                        <a href="?act=userDashboard">
                             <i class="fas fa-users"></i>
                             <span>Tài khoản</span>
                         </a>
@@ -76,59 +78,57 @@
                 <div class="form-container">
                     <form action="?act=save-product" method="POST" enctype="multipart/form-data" class="admin-form">
                         <div class="form-group">
-                            <label for="product_name">Tên sản phẩm *</label>
+                            <label for="product_name">Tên sản phẩm</label>
                             <input type="text" id="product_name" name="product_name" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="description">Mô tả</label>
                             <textarea id="description" name="description" rows="4"></textarea>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="price">Giá *</label>
+                                <label for="price">Giá</label>
                                 <input type="number" id="price" name="price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Số lượng</label>
+                                <input type="number" id="quantity" name="quantity" required>
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Danh mục</label>
                                 <select id="category_id" name="category_id" required>
-                                    <option value="">Chọn danh mục</option>
-                                    <option value="1">Phòng khách</option>
-                                    <option value="2">Phòng ngủ</option>
-                                    <option value="3">Phòng ăn</option>
-                                    <option value="4">Văn phòng</option>
+                                    <option value="">Chọn Danh Mục</option>
+                                    <?php foreach ($listCategories as $category) { ?>
+                                        <option value="<?= $category['category_id'] ?>"><?= $category['category_name'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
+                            <div class="form-group"> <label for="hot">Sản phẩm hot</label>
+                                <input type="checkbox" id="hot" name="hot" class="hot-product-checkbox">
+                            </div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="image">Hình ảnh</label>
                             <input type="file" id="image" name="image" accept="image/*">
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="status">Trạng thái</label>
-                            <select id="status" name="status">
-                                <option value="active">Hoạt động</option>
-                                <option value="inactive">Không hoạt động</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <a href="?act=products" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i>
-                                Quay lại
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i>
-                                Lưu sản phẩm
-                            </button>
-                        </div>
-                    </form>
                 </div>
+                <div class=" form-actions">
+                    <a href="?act=productDashboard" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Lưu sản phẩm
+                    </button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
+    </div>
 </body>
-</html> 
+
+</html>

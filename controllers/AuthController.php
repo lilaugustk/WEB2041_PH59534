@@ -33,7 +33,7 @@ class AuthController
             }
 
             // Kiểm tra email đã tồn tại chưa
-            if (!empty($email) && $this->modelUser->emailExists($email)) {
+            if (!empty($email) && $this->modelUser->emailExists(email: $email)) {
                 $errors[] = "Email đã tồn tại trong hệ thống";
             }
 

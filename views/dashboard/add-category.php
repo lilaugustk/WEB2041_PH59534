@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh mục - Admin Dashboard</title>
+    <title>Thêm sản phẩm - Admin Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -24,13 +24,13 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="?act=productDashboard">
                             <i class="fas fa-box"></i>
                             <span>Sản phẩm</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="?act=categoryDashboard">
                             <i class="fas fa-tags"></i>
                             <span>Danh mục</span>
@@ -63,7 +63,7 @@
             <!-- Header -->
             <header class="content-header">
                 <div class="header-left">
-                    <h1>Quản lý danh mục</h1>
+                    <h1>Thêm sản phẩm mới</h1>
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
@@ -75,50 +75,27 @@
 
             <!-- Content Area -->
             <div class="content-area">
-                <div class="page-header">
-                    <h2>Danh sách danh mục</h2>
-                    <a href="?act=add-category" class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
-                        Thêm danh mục
+                <div class="form-container">
+                    <form action="?act=save-category" method="POST" enctype="multipart/form-data" class="admin-form">
+                        <div class="form-group">
+                            <label for="category_name">Tên danh mục *</label>
+                            <input type="text" id="category_name" name="category_name" required>
+                        </div>
+                </div>
+                <div class=" form-actions">
+                    <a href="?act=categoryDashboard" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Quay lại
                     </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Lưu danh mục
+                    </button>
                 </div>
-
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tên danh mục</th>
-                                <!-- <th>Mô tả</th>
-                                <th>Số sản phẩm</th> -->
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <?php foreach ($listCategories as $category) { ?>
-                            <tr>
-                                <tbody>
-                                    <tr>
-                                        <td><?= $category['category_id'] ?></td>
-                                        <td><?= $category['category_name'] ?></td>
-                                        <!-- <td>Sofa và bàn ghế phòng khách</td>
-                                <td>8</td> -->
-                                        <td>
-                                            <div class="action-buttons">
-                                                <a href="?act=edit-category&id=<?= $category['category_id'] ?>" class="btn btn-sm btn-success">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="?act=delete-category&id=<?= $category['category_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            <?php } ?>
-                    </table>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

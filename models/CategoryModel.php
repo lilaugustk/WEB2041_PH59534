@@ -1,6 +1,7 @@
 <?php
 // Có class chứa các function thực thi tương tác với cơ sở dữ liệu 
-class CategoryModel {
+class CategoryModel
+{
     public $connection; // Biến kết nối CSDL
     public function __construct()
     {
@@ -19,5 +20,20 @@ class CategoryModel {
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insertCategory($category_name)
+    {
+        $sql = "INSERT INTO `categories` (`category_name`) VALUES (:category_name)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':category_name', $category_name);
+        $stmt->execute();
+    }
+    public function deleteCategory($id)
+    {
+        $sql = "DELETE FROM `categories` WHERE `category_id` = :id";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

@@ -93,7 +93,6 @@
                                 <th>Danh mục</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
-                                <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -108,13 +107,12 @@
                                     <td><?= $product['category_name'] ?></td>
                                     <td><?= $product['price'] ?></td>
                                     <td><?= $product['quantity'] ?></td>
-                                    <td><span class="status-badge status-active">Hoạt động</span></td>
                                     <td>
                                         <div class="action-buttons">
                                             <a href="?act=edit-product&id=<?= $product['product_id'] ?>" class="btn btn-sm btn-success">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="?act=delete-product&id=1" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                            <a href="?act=delete-product&id=<?= $product['product_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>

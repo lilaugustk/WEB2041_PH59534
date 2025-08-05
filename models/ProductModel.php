@@ -43,4 +43,24 @@
             $stmt->execute();
             return $stmt->fetchColumn();
         }
+        public function insertProduct($product_name, $price, $productQuantity, $description, $image, $category_id, $hot)
+        {
+            $sql = "INSERT INTO `products` (`product_name`, `price`, `quantity`, `description`, `image`, `category_id`, `hot`) VALUES (:product_name, :price, :quantity, :description, :image, :category_id, :hot)";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':product_name', $product_name);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':quantity', $productQuantity);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':category_id', $category_id);
+            $stmt->bindParam(':hot', $hot, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+        public function deleteProduct($id)
+        {
+            $sql = "DELETE FROM `products` WHERE `product_id` = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
     }

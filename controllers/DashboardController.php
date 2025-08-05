@@ -17,13 +17,9 @@ class DashboardController
     }
     public function index()
     {
-        $productModel = new ProductModel();
-        $categoryModel = new CategoryModel();
-        $userModel = new UserModel();
-
-        $totalProducts = $productModel->countProducts();
-        $totalCategories = $categoryModel->countCategories();
-        $totalUsers = $userModel->countUsers();
+        $totalProducts = $this->modelProduct->countProducts();
+        $totalCategories = $this->modelCategory->countCategories();
+        $totalUsers = $this->modelUser->countUsers();
 
         $totalData = [
             'totalProducts' => $totalProducts,
@@ -47,12 +43,15 @@ class DashboardController
 
     public function addProduct()
     {
-        require_once './views/add-product.php';
+        $listProducts  = $this->modelProduct->getAllProduct();
+        $listCategories = $this->modelCategory->getAllCategories();
+
+        require_once './views/dashboard/add-product.php';
     }
 
     public function addCategory()
     {
-        require_once './views/add-category.php';
+        require_once './views/dashboard/add-category.php';
     }
 
     public function editProduct()
@@ -67,33 +66,45 @@ class DashboardController
 
     public function saveProduct()
     {
-        // Xử lý lưu sản phẩm
-        // Bạn có thể thêm logic database ở đây
-        header('Location: ?act=products');
+        $productName = $_POST['product_name'];
+        $productPrice = $_POST['price'];
+        $productQuantity = $_POST['quantity'];
+        $productDescription = $_POST['description'];
+        $productImage = uploadFile($_FILES['image'], 'imgproduct');
+        $productCategory = $_POST['category_id'];
+        $hot = isset($_POST['hot']) ? 1 : 0;
+
+        $this->modelProduct->insertProduct($productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
+        header('Location: ?act=productDashboard');
         exit;
     }
 
     public function saveCategory()
     {
         // Xử lý lưu danh mục
-        // Bạn có thể thêm logic database ở đây
-        header('Location: ?act=categories');
+        $categoryName = $_POST['category_name'];
+        $this->modelCategory->insertCategory($categoryName);
+        header('Location: ?act=categoryDashboard');
         exit;
     }
 
     public function deleteProduct()
     {
-        // Xử lý xóa sản phẩm
-        // Bạn có thể thêm logic database ở đây
-        header('Location: ?act=products');
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $this->modelProduct->deleteProduct($id);
+        }
+        header('Location: ?act=productDashboard');
         exit;
     }
 
     public function deleteCategory()
     {
-        // Xử lý xóa danh mục
-        // Bạn có thể thêm logic database ở đây
-        header('Location: ?act=categories');
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $this->modelCategory->deleteCategory($id);
+        }
+        header('Location: ?act=categoryDashboard');
         exit;
     }
 }
