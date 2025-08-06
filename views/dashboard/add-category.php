@@ -65,7 +65,7 @@
             <!-- Header -->
             <header class="content-header">
                 <div class="header-left">
-                    <h1>Thêm sản phẩm mới</h1>
+                    <h1>Thêm danh mục mới</h1>
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
@@ -79,9 +79,12 @@
             <div class="content-area">
                 <div class="form-container">
                     <form action="?act=save-category" method="POST" enctype="multipart/form-data" class="admin-form">
+
+                        <?php include 'views/layouts/errors.php' ?>
+
                         <div class="form-group">
-                            <label for="category_name">Tên danh mục *</label>
-                            <input type="text" id="category_name" name="category_name" required>
+                            <label for="category_name">Tên danh mục</label>
+                            <input type="text" id="category_name" name="category_name">
                         </div>
                 </div>
                 <div class=" form-actions">

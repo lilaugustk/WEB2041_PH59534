@@ -108,8 +108,6 @@
                                     <tr>
                                         <td><?= htmlspecialchars($category['category_id']) ?></td>
                                         <td><?= htmlspecialchars($category['category_name']) ?></td>
-                                        <!-- <td>Sofa và bàn ghế phòng khách</td>
-                                <td>8</td> -->
                                         <td>
                                             <div class="action-buttons">
                                                 <a href="?act=edit-category&id=<?= htmlspecialchars($category['category_id']) ?>" class="btn btn-sm btn-success">

@@ -92,10 +92,18 @@ class DashboardController
     public function saveCategory()
     {
         // Xử lý lưu danh mục
-        $categoryName = $_POST['category_name'];
-        $this->modelCategory->insertCategory($categoryName);
-        header('Location: ?act=categoryDashboard');
-        exit;
+        $categoryName = trim($_POST['category_name']);
+        $errors = [];
+
+        if (empty($categoryName)) $errors[] = "Vui lòng nhập tên danh mục";
+
+        if (empty($errors)) {
+            $this->modelCategory->insertCategory($categoryName);
+            header('Location: ?act=categoryDashboard');
+            exit;
+        } else {
+            require_once './views/dashboard/add-category.php';
+        }
     }
     public function editProduct()
     {
