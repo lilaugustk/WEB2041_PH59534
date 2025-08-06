@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sửa sản phẩm - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/error.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -78,7 +81,7 @@
                 <div class="form-container">
                     <form action="?act=update-product" method="POST" enctype="multipart/form-data" class="admin-form">
                         <input type="hidden" name="product_id" value="<?= htmlspecialchars($editProduct['product_id'] ?? '') ?>">
-                        <input type="hidden" name="current_image" value="<?= htmlspecialchars($editProduct['image'] ?? '') ?>"> 
+                        <input type="hidden" name="current_image" value="<?= htmlspecialchars($editProduct['image'] ?? '') ?>">
                         <div class="form-group">
                             <label for="product_name">Tên sản phẩm</label>
                             <input type="text" id="product_name" name="product_name" value="<?= htmlspecialchars($editProduct['product_name'] ?? '') ?>" required>

@@ -17,27 +17,21 @@
         <div class="form-right-box">
             <form action="?act=register" method="POST">
                 <h2>Đăng Ký</h2>
-                
+
                 <!-- Hiển thị lỗi -->
-                <?php if (isset($errors) && !empty($errors)): ?>
-                    <div class="error-messages">
-                        <?php foreach ($errors as $error): ?>
-                            <p class="error"><?php echo htmlspecialchars($error); ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-                
+                <?php include 'views/layouts/errors.php' ?>
+
                 <!-- <label for="user_name">Tên đăng nhập:</label> -->
-                <input type="text" id="user_name" name="user_name" placeholder="Vui lòng nhập tên đăng nhập" required>
+                <input type="text" id="user_name" name="user_name" placeholder="Vui lòng nhập tên đăng nhập">
 
                 <!-- <label for="password">Mật khẩu:</label> -->
-                <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu">
 
                 <!-- <label for="email">Email:</label> -->
-                <input type="email" id="email" name="email" placeholder="Vui lòng nhập email" required>
+                <input type="email" id="email" name="email" placeholder="Vui lòng nhập email">
 
                 <!-- <label for="phone_number">Số điện thoại:</label> -->
-                <input type="number" id="phone_number" name="phone_number" placeholder="Vui lòng nhập số điện thoại" required>
+                <input type="number" id="phone_number" name="phone_number" placeholder="Vui lòng nhập số điện thoại">
 
                 <button class="submit-button" type="submit">Đăng Ký</button>
             </form>

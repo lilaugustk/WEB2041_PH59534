@@ -16,21 +16,15 @@
         <div class="form-right-box">
             <form action="?act=login" method="POST">
                 <h2>Đăng Nhập</h2>
-                
+
                 <!-- Hiển thị lỗi -->
-                <?php if (isset($errors) && !empty($errors)): ?>
-                    <div class="error-messages">
-                        <?php foreach ($errors as $error): ?>
-                            <p class="error"><?php echo htmlspecialchars($error); ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-                
+                <?php include 'views/layouts/errors.php' ?>
+
                 <!-- <label for="user_name">Tên đăng nhập:</label> -->
-                <input type="email" id="email" name="email" placeholder="Vui lòng nhập email" required>
+                <input type="email" id="email" name="email" placeholder="Vui lòng nhập email">
 
                 <!-- <label for="password">Mật khẩu:</label> -->
-                <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu">
 
                 <button class="submit-button" type="submit">Đăng Nhập</button>
                 <div class="under-submit-button">

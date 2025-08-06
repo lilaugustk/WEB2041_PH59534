@@ -165,18 +165,18 @@ header ul li a {
   border-radius: 16px;
 }
 .name {
-  height: 55px;
+  height: 40px;
   color: #70908b;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 21px;
+  /* line-height: 36px; */
   font-family: "Playfair Display", serif;
 }
 .content-item .price {
   display: flex;
 }
 .content-item .price p {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   font-family: "Roboto Mono", sans-serif;
 }
@@ -185,14 +185,26 @@ header ul li a {
   color: #ff0000;
 }
 .button-detail {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
   text-decoration: none;
-  color: #000;
+  background-color: #70908b;
+  color: #ffffff;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 16px;
   text-transform: uppercase;
   font-family: "Playfair Display", serif;
+  padding: 12px 24px;
+  border-radius: 8px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.button-detail:hover {
+  background-color: #07484a;
+  transform: translateY(-2px);
+}
 /* Slide Button CSS */
 .slider-button-box {
   width: 100%;
@@ -528,59 +540,3 @@ nav ul li:hover a {
   text-decoration: none;
   color: #07484a;
 }
-
-/* Error messages styling */
-.error-messages {
-  margin-bottom: 15px;
-  width: 100%;
-}
-
-.error-messages .error {
-  color: #dc3545;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  font-family: "Roboto", serif;
-}
-/* Form Register/Login CSS */
-
-/* User section styling */
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-section .account {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.logout-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: transparent;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-}
-
-.logout-icon:hover {
-  background-color: #f1f1f1;
-}
-
-.logout-icon svg {
-  transition: transform 0.2s ease;
-}
-
-.logout-icon:hover svg {
-  transform: scale(1.1);
-}
-/* User section styling */

@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm sản phẩm - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/error.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -77,9 +79,12 @@
             <div class="content-area">
                 <div class="form-container">
                     <form action="?act=save-product" method="POST" enctype="multipart/form-data" class="admin-form">
+
+                        <?php include 'views/layouts/errors.php' ?>
+
                         <div class="form-group">
                             <label for="product_name">Tên sản phẩm</label>
-                            <input type="text" id="product_name" name="product_name" required>
+                            <input type="text" id="product_name" name="product_name">
                         </div>
 
                         <div class="form-group">
@@ -90,15 +95,15 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="price">Giá</label>
-                                <input type="number" id="price" name="price" required>
+                                <input type="number" id="price" name="price">
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Số lượng</label>
-                                <input type="number" id="quantity" name="quantity" required>
+                                <input type="number" id="quantity" name="quantity">
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Danh mục</label>
-                                <select id="category_id" name="category_id" required>
+                                <select id="category_id" name="category_id">
                                     <option value="">Chọn Danh Mục</option>
                                     <?php foreach ($listCategories as $category) { ?>
                                         <option value="<?= htmlspecialchars($category['category_id']) ?>">

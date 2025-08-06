@@ -56,7 +56,6 @@ class DashboardController
 
     public function saveProduct()
     {
-        // TODO: Thêm validation cho các trường dữ liệu
         $productName = trim($_POST['product_name'] ?? '');
         $productPrice = trim($_POST['price'] ?? '');
         $productQuantity = trim($_POST['quantity'] ?? '');
@@ -64,23 +63,25 @@ class DashboardController
         $productCategory = $_POST['category_id'] ?? '';
         $hot = isset($_POST['hot']) ? 1 : 0;
         $imageFile = $_FILES['image'] ?? null;
+        $errors = [];
 
-        // Basic validation
-        if (empty($productName) || empty($productPrice) || empty($productQuantity) || empty($productCategory) || !$imageFile || $imageFile['error'] != UPLOAD_ERR_OK) {
-            // Nếu có lỗi, bạn có thể lưu lỗi vào session và hiển thị lại form
-            // Hoặc đơn giản là báo lỗi và dừng lại
-            echo "Vui lòng điền đầy đủ thông tin và tải lên hình ảnh hợp lệ.";
-            // Tốt hơn là redirect về form add-product với thông báo lỗi
-            // header('Location: ?act=add-product&error=validation');
-            exit;
-        }
+        // Thực hiện validation
+        if (empty($productName)) $errors[] = "Vui lòng nhập tên sản phẩm";
+        if (empty($productPrice)) $errors[] = "Vui lòng nhập giá sản phẩm";
+        if (empty($productQuantity)) $errors[] = "Vui lòng nhập số lượng sản phẩm";
+        if (empty($productCategory)) $errors[] = "Vui lòng chọn danh mục sản phẩm";
+        if (!$imageFile || $imageFile['error'] != UPLOAD_ERR_OK) $errors[] = "Vui lòng chọn hình ảnh";
 
-        $productImage = uploadFile($imageFile, 'imgproduct');
-
-        if ($productImage) {
+        // Nếu không có lỗi, tiến hành upload file và lưu vào CSDL
+        if (empty($errors)) {
+            $productImage = uploadFile($imageFile, 'imgproduct');
             $this->modelProduct->insertProduct($productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
             header('Location: ?act=productDashboard');
             exit;
+        } else {
+            // Nếu có lỗi, cần tải lại danh sách danh mục và hiển thị lại form với lỗi
+            $listCategories = $this->modelCategory->getAllCategories();
+            require_once './views/dashboard/add-product.php';
         }
     }
     public function addCategory()
