@@ -67,7 +67,13 @@
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
-                        <span>Xin chào, Admin</span>
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                        } ?>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            <span>Xin chào, <?php echo htmlspecialchars($_SESSION['user']['user_name']); ?></span>
+                        <?php } ?>
                         <img src="img/User.svg" alt="Admin" class="admin-avatar">
                     </div>
                 </div>
@@ -105,7 +111,7 @@
                                     </td>
                                     <td><?= htmlspecialchars($product['product_name']) ?></td>
                                     <td><?= htmlspecialchars($product['category_name']) ?></td>
-                                    <td><?= htmlspecialchars($product['price']) ?></td>
+                                    <td><?= number_format(htmlspecialchars($product['price'])) ?> VNĐ</td>
                                     <td><?= htmlspecialchars($product['quantity']) ?></td>
                                     <td>
                                         <div class="action-buttons">

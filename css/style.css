@@ -184,6 +184,16 @@ header ul li a {
   margin-left: 10px;
   color: #ff0000;
 }
+.button-detail {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-family: "Playfair Display", serif;
+}
+
+/* Slide Button CSS */
 .slider-button-box {
   width: 100%;
   height: 40px;
@@ -198,6 +208,7 @@ header ul li a {
   height: 80px;
   border: none;
   border-radius: 50%;
+  cursor: pointer;
 }
 .btn-slide svg {
   width: 50%;

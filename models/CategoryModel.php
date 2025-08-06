@@ -29,6 +29,23 @@ class CategoryModel
         $stmt->bindParam(':category_name', $category_name);
         $stmt->execute();
     }
+
+    public function getCategoryById($id)
+    {
+        $sql = "SELECT * FROM `categories` WHERE `category_id` = :id";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function updateCategory($id, $category_name)
+    {
+        $sql = "UPDATE `categories` SET `category_name` = :category_name WHERE `category_id` = :id";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':category_name', $category_name);
+        $stmt->execute();
+    }
     public function deleteCategory($id)
     {
         $sql = "DELETE FROM `categories` WHERE `category_id` = :id";

@@ -2,6 +2,7 @@
 require_once './models/ProductModel.php';
 require_once './models/CategoryModel.php';
 require_once './models/UserModel.php';
+require_once './controllers/AuthController.php';
 
 
 class DashboardController
@@ -9,8 +10,12 @@ class DashboardController
     public $modelProduct;
     public $modelCategory;
     public $modelUser;
+    public $authController;
     public function __construct()
     {
+        $this->authController = new AuthController();
+        $this->authController->requireAdmin(); // Bắt buộc phải là admin để truy cập
+
         $this->modelProduct = new ProductModel();
         $this->modelCategory = new CategoryModel();
         $this->modelUser = new UserModel();
@@ -51,17 +56,32 @@ class DashboardController
 
     public function saveProduct()
     {
-        $productName = $_POST['product_name'];
-        $productPrice = $_POST['price'];
-        $productQuantity = $_POST['quantity'];
-        $productDescription = $_POST['description'];
-        $productImage = uploadFile($_FILES['image'], 'imgproduct');
-        $productCategory = $_POST['category_id'];
+        // TODO: Thêm validation cho các trường dữ liệu
+        $productName = trim($_POST['product_name'] ?? '');
+        $productPrice = trim($_POST['price'] ?? '');
+        $productQuantity = trim($_POST['quantity'] ?? '');
+        $productDescription = trim($_POST['description'] ?? '');
+        $productCategory = $_POST['category_id'] ?? '';
         $hot = isset($_POST['hot']) ? 1 : 0;
+        $imageFile = $_FILES['image'] ?? null;
 
-        $this->modelProduct->insertProduct($productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
-        header('Location: ?act=productDashboard');
-        exit;
+        // Basic validation
+        if (empty($productName) || empty($productPrice) || empty($productQuantity) || empty($productCategory) || !$imageFile || $imageFile['error'] != UPLOAD_ERR_OK) {
+            // Nếu có lỗi, bạn có thể lưu lỗi vào session và hiển thị lại form
+            // Hoặc đơn giản là báo lỗi và dừng lại
+            echo "Vui lòng điền đầy đủ thông tin và tải lên hình ảnh hợp lệ.";
+            // Tốt hơn là redirect về form add-product với thông báo lỗi
+            // header('Location: ?act=add-product&error=validation');
+            exit;
+        }
+
+        $productImage = uploadFile($imageFile, 'imgproduct');
+
+        if ($productImage) {
+            $this->modelProduct->insertProduct($productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
+            header('Location: ?act=productDashboard');
+            exit;
+        }
     }
     public function addCategory()
     {
@@ -95,38 +115,79 @@ class DashboardController
         require_once './views/dashboard/edit-product.php';
     }
 
-    public function editCategory()
-    {
-        require_once './views/dashboard/edit-category.php';
-    }
-
     public function updateProduct()
     {
-        $productId = $_POST['product_id'];
-        $productName = $_POST['product_name'];
-        $productPrice = $_POST['price'];
-        $productQuantity = $_POST['quantity'];
-        $productDescription = $_POST['description'];
-        $productCategory = $_POST['category_id'];
+        $id = $_POST['product_id'];
+        $product_name = $_POST['product_name'];
+        $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
+        $description = $_POST['description'];
+        $category_id = $_POST['category_id'];
         $hot = isset($_POST['hot']) ? 1 : 0;
-        $productImage = $_POST['current_image']; // Giữ ảnh cũ làm mặc định
 
-        // Kiểm tra xem có file ảnh mới được tải lên không
-        if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-            // Có thể thêm logic xóa file ảnh cũ ở đây nếu cần
-            $productImage = uploadFile($_FILES['image'], 'imgproduct');
+        $image = $_POST['current_image']; // Giữ ảnh cũ làm mặc định
+
+        // Xử lý nếu có ảnh mới được tải lên
+        $newImageFile = $_FILES['image'] ?? null;
+        if ($newImageFile && $newImageFile['error'] == UPLOAD_ERR_OK) {
+            // Upload ảnh mới
+            $newImagePath = uploadFile($newImageFile, 'imgproduct');
+
+            // Nếu upload thành công và có ảnh cũ, hãy xóa ảnh cũ đi
+            if ($newImagePath && !empty($image) && file_exists($image)) {
+                unlink($image);
+            }
+            $image = $newImagePath; // Cập nhật đường dẫn ảnh để lưu vào DB
         }
-        $this->modelProduct->updateProduct($productId, $productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
+        // Cập nhật thông tin sản phẩm
+        $this->modelProduct->updateProduct($id, $product_name, $price, $quantity, $description, $image, $category_id, $hot);
         header('Location: ?act=productDashboard');
         exit;
     }
+    public function editCategory()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: ?act=categoryDashboard');
+            exit;
+        }
+        $editCategory = $this->modelCategory->getCategoryById($id);
+        if (!$editCategory) {
+            // Xử lý trường hợp không tìm thấy danh mục
+            echo "Danh mục không tồn tại!";
+            exit;
+        }
+        require_once './views/dashboard/edit-category.php';
+    }
 
+    public function updateCategory()
+    {
+        $id = $_POST['category_id'];
+        $category_name = $_POST['category_name'];
+        $this->modelCategory->updateCategory($id, $category_name);
+        header('Location: ?act=categoryDashboard');
+        exit;
+    }
 
     public function deleteProduct()
     {
         $id = $_GET['id'] ?? null;
         if ($id) {
-            $this->modelProduct->deleteProduct($id);
+            // Lấy thông tin sản phẩm để có đường dẫn ảnh
+            $product = $this->modelProduct->getProductById($id);
+
+            if ($product) {
+                // Lấy đường dẫn ảnh
+                $imagePath = $product['image'];
+
+                // Xóa sản phẩm khỏi CSDL
+                $this->modelProduct->deleteProduct($id);
+
+                // Nếu có ảnh và file tồn tại, thì xóa file ảnh
+                if (!empty($imagePath) && file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
         }
         header('Location: ?act=productDashboard');
         exit;

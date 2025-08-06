@@ -78,7 +78,7 @@
                 <div class="form-container">
                     <form action="?act=update-product" method="POST" enctype="multipart/form-data" class="admin-form">
                         <input type="hidden" name="product_id" value="<?= htmlspecialchars($editProduct['product_id'] ?? '') ?>">
-                        <input type="hidden" name="current_image" value="<?= htmlspecialchars($editProduct['image'] ?? '') ?>">
+                        <input type="hidden" name="current_image" value="<?= htmlspecialchars($editProduct['image'] ?? '') ?>"> 
                         <div class="form-group">
                             <label for="product_name">Tên sản phẩm</label>
                             <input type="text" id="product_name" name="product_name" value="<?= htmlspecialchars($editProduct['product_name'] ?? '') ?>" required>

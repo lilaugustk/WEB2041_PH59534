@@ -43,24 +43,17 @@
             $stmt->execute();
             return $stmt->fetchColumn();
         }
-        public function insertProduct($product_name, $price, $productQuantity, $description, $image, $category_id, $hot)
+        public function insertProduct($product_name, $price, $quantity, $description, $image, $category_id, $hot)
         {
             $sql = "INSERT INTO `products` (`product_name`, `price`, `quantity`, `description`, `image`, `category_id`, `hot`) VALUES (:product_name, :price, :quantity, :description, :image, :category_id, :hot)";
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':product_name', $product_name);
             $stmt->bindParam(':price', $price);
-            $stmt->bindParam(':quantity', $productQuantity);
+            $stmt->bindParam(':quantity', $quantity);
             $stmt->bindParam(':description', $description);
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':category_id', $category_id);
             $stmt->bindParam(':hot', $hot, PDO::PARAM_INT);
-            $stmt->execute();
-        }
-        public function deleteProduct($id)
-        {
-            $sql = "DELETE FROM `products` WHERE `product_id` = :id";
-            $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         }
 
@@ -73,17 +66,26 @@
             return $stmt->fetch();
         }
 
-        public function updateProduct($productId, $productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot) {
-            $sql = "UPDATE `products` SET `product_name` = :productName, `price` = :productPrice, `quantity` = :productQuantity, `description` = :productDescription, `image` = :productImage, `category_id` = :productCategory, `hot` = :hot WHERE `product_id` = :productId";
+        public function updateProduct($id, $product_name, $price, $quantity, $description, $image, $category_id, $hot)
+        {
+            $sql = "UPDATE `products` SET `product_name` = :product_name, `price` = :price, `quantity` = :quantity, `description` = :description, `image` = :image, `category_id` = :category_id, `hot` = :hot WHERE `product_id` = :id";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-            $stmt->bindParam(':productName', $productName);
-            $stmt->bindParam(':productPrice', $productPrice);
-            $stmt->bindParam(':productQuantity', $productQuantity);
-            $stmt->bindParam(':productDescription', $productDescription);
-            $stmt->bindParam(':productImage', $productImage);
-            $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':product_name', $product_name);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':quantity', $quantity);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
             $stmt->bindParam(':hot', $hot, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        public function deleteProduct($id)
+        {
+            $sql = "DELETE FROM `products` WHERE `product_id` = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         }
     }

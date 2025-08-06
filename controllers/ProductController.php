@@ -25,20 +25,17 @@ class ProductController
 
     public function category()
     {
-        $cat = $_GET['cat'] ?? null;
-        $map = [
-            'bedroom' => ['id' => 1, 'name' => 'Phòng Ngủ'],
-            'diningroom' => ['id' => 2, 'name' => 'Phòng Ăn'],
-            'workingroom' => ['id' => 3, 'name' => 'Phòng Làm Việc'],
-            'livingroom' => ['id' => 4, 'name' => 'Phòng Khách'],
-            'kitchen' => ['id' => 5, 'name' => 'Phòng Bếp'],
-            'meetingroom' => ['id' => 6, 'name' => 'Phòng Họp'],
-            'bathroom' => ['id' => 7, 'name' => 'Phòng Tắm'],
-        ];
-        if ($cat && isset($map[$cat])) {
-            $listProducts = $this->modelProduct->getProductsByCategory($map[$cat]['id']);
-            $categoryName = $map[$cat]['name'];
+        // Lấy category_id từ URL, ví dụ: ?act=category&id=1
+        $categoryId = $_GET['id'] ?? null;
+
+        if ($categoryId) {
+            // Lấy sản phẩm theo category id
+            $listProducts = $this->modelProduct->getProductsByCategory($categoryId);
+            // Lấy thông tin của category để hiển thị tên
+            $currentCategory = $this->modelCategory->getCategoryById($categoryId);
+            $categoryName = $currentCategory ? $currentCategory['category_name'] : 'Danh mục không tồn tại';
         } else {
+            // Nếu không có id, lấy tất cả sản phẩm
             $listProducts = $this->modelProduct->getAllProduct();
             $categoryName = 'Tất cả sản phẩm';
         }

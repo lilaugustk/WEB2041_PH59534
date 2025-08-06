@@ -49,17 +49,25 @@ class AuthController
 
             if (empty($errors)) {
                 $result = $this->modelUser->createUser($user_name, $email, $password, $phone_number);
-                if ($result) {
-                    header('Location: ?act=login');
+                if ($result) { // $result ở đây là user_id mới được tạo
+                    // Lấy lại thông tin người dùng vừa tạo để đăng nhập
+                    $newUser = $this->modelUser->getUserById($result);
+                    if ($newUser) {
+                        // Thiết lập session cho người dùng mới
+                        $this->setUserSession($newUser);
+                        // Chuyển hướng về trang chủ
+                        header('Location: ?act=/');
+                        exit;
+                    }
+                    // Nếu không lấy được user thì vẫn về trang login như cũ
+                    header('Location: ?act=login'); 
                     exit;
                 } else {
                     $errors[] = "Đăng ký không thành công. Vui lòng thử lại.";
                 }
             }
-            require_once './views/register.php';
-        } else {
-            require_once './views/register.php';
         }
+        require_once './views/register.php';
     }
     // Xử lý đăng nhập
     public function login()
@@ -83,17 +91,21 @@ class AuthController
 
                 if ($user) {
                     $this->setUserSession($user);
-                    header('Location: ?act=/');
+
+                    // Kiểm tra vai trò và chuyển hướng phù hợp
+                    if ($user['role'] === 'admin') {
+                        header('Location: ?act=dashboard'); // Chuyển hướng admin đến trang dashboard
+                    } else {
+                        header('Location: ?act=/'); // Chuyển hướng người dùng thường về trang chủ
+                    }
                     exit;
                 } else {
                     $errors[] = "Email hoặc mật khẩu không đúng";
                 }
             }
 
-            require_once './views/login.php';
-        } else {
-            require_once './views/login.php';
         }
+        require_once './views/login.php';
     }
 
     // Đăng xuất
@@ -145,8 +157,12 @@ class AuthController
     // Bắt buộc phải là admin
     public function requireAdmin()
     {
+        // Đầu tiên, kiểm tra xem người dùng đã đăng nhập chưa.
+        // Nếu chưa, hàm này sẽ tự động chuyển hướng đến trang login.
+        $this->requireLogin();
+
         $user = $this->getCurrentUser();
-        if (!$user || $user['role'] !== 'admin') {
+        if ($user['role'] !== 'admin') {
             echo "Bạn không có quyền truy cập trang này.";
             exit;
         }

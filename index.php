@@ -45,6 +45,7 @@ match ($action) {
     'save-product' => (new DashboardController())->saveProduct(),
     'save-category' => (new DashboardController())->saveCategory(),
     'update-product' => (new DashboardController())->updateProduct(),
+    'update-category' => (new DashboardController())->updateCategory(),
 
     // Xử lý xóa sản phẩm, danh mục
     'delete-product' => (new DashboardController())->deleteProduct(),
@@ -52,14 +53,7 @@ match ($action) {
     
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
-    'bedroom' => (new ProductController())->category(),
-    'diningroom' => (new ProductController())->category(),
-    'workingroom' => (new ProductController())->category(),
-    'livingroom' => (new ProductController())->category(),
-    'kitchen' => (new ProductController())->category(),
-    'mmeetingroom' => (new ProductController())->category(),
-    'bathroom' => (new ProductController())->category(),
-    
+
     // Trang đăng ký
     'register' => (new AuthController())->register(),
     // Trang đăng nhập

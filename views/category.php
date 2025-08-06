@@ -11,8 +11,8 @@
 
 <body>
     <div class="container">
-    <?php include 'views/layouts/header.php'; ?>
-    <div class="box-banner">
+        <?php include 'views/layouts/header.php'; ?>
+        <div class="box-banner">
             <img src="img/Banner.jpg" alt="" class="banner">
             <div class="head-line">
                 <p class="title-banner">Kiến Tạo Không Gian Sống Của Bạn</p>
@@ -24,25 +24,25 @@
             <div class="category-nav">
                 <ul>
                     <li>
-                        <a href="?act=category&cat=bedroom">Phòng Ngủ</a>
+                        <a href="?act=category&id=1">Phòng Ngủ</a>
                     </li>
                     <li>
-                        <a href="?act=category&cat=diningroom">Phòng Ăn</a>
+                        <a href="?act=category&id=2">Phòng Ăn</a>
                     </li>
                     <li>
-                        <a href="?act=category&cat=workingroom">Phòng Làm Việc</a>
+                        <a href="?act=category&id=3">Phòng Làm Việc</a>
                     </li>
                     <li>
-                        <a href="?act=category&cat=livingroom">Phòng Khách</a>
+                        <a href="?act=category&id=4">Phòng Khách</a>
                     </li>
                     <li>
-                        <a href="?act=category&cat=kitchen">Phòng Bếp</a>
+                        <a href="?act=category&id=5">Phòng Bếp</a>
                     </li>
                     <li>
-                        <a href="?act=category&cat=meetingroom">Phòng Họp</a>
+                        <a href="?act=category&id=6">Phòng Họp</a>
                     </li>
                     <li>
-                        <a href="?act=category&cat=bathroom">Phòng Tắm</a>
+                        <a href="?act=category&id=7">Phòng Tắm</a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +58,7 @@
             </div>
     </div>
     </article>
-    <?php include 'views/layouts/footer.php'; ?>    </div>
+    <?php include 'views/layouts/footer.php'; ?> </div>
 </body>
 
 

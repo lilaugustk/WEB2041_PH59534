@@ -36,6 +36,7 @@
                             <p>Giá:</p>
                             <p class="price-value"><?= number_format($hotProduct["price"]) ?> VNĐ</p>
                         </span>
+                        <a href="?action=detailProduct" class="button-detail">Xem chi tiết</a>
                     </div>
                 <?php } ?>
             </div>

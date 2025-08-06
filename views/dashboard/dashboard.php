@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -65,7 +67,13 @@
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
-                        <span>Xin chào, Admin</span>
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                        } ?>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            <span>Xin chào, <?php echo htmlspecialchars($_SESSION['user']['user_name']); ?></span>
+                        <?php } ?>
                         <img src="img/User.svg" alt="Admin" class="admin-avatar">
                     </div>
                 </div>
@@ -136,11 +144,12 @@
                                     <span>10 phút trước</span>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
