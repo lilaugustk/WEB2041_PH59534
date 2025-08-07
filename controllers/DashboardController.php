@@ -46,6 +46,12 @@ class DashboardController
         require_once './views/dashboard/categoryDashboard.php';
     }
 
+    public function userDashboard()
+    {
+        $listUsers = $this->modelUser->getAllUsers();
+        require_once './views/dashboard/userDashboard.php';
+    }
+
     public function addProduct()
     {
         $listProducts  = $this->modelProduct->getAllProduct();
@@ -74,7 +80,7 @@ class DashboardController
 
         // Nếu không có lỗi, tiến hành upload file và lưu vào CSDL
         if (empty($errors)) {
-            $productImage = uploadFile($imageFile, 'imgproduct');
+            $productImage = uploadFile($imageFile, 'uploads/imgproduct/');
             $this->modelProduct->insertProduct($productName, $productPrice, $productQuantity, $productDescription, $productImage, $productCategory, $hot);
             header('Location: ?act=productDashboard');
             exit;
@@ -84,27 +90,7 @@ class DashboardController
             require_once './views/dashboard/add-product.php';
         }
     }
-    public function addCategory()
-    {
-        require_once './views/dashboard/add-category.php';
-    }
 
-    public function saveCategory()
-    {
-        // Xử lý lưu danh mục
-        $categoryName = trim($_POST['category_name']);
-        $errors = [];
-
-        if (empty($categoryName)) $errors[] = "Vui lòng nhập tên danh mục";
-
-        if (empty($errors)) {
-            $this->modelCategory->insertCategory($categoryName);
-            header('Location: ?act=categoryDashboard');
-            exit;
-        } else {
-            require_once './views/dashboard/add-category.php';
-        }
-    }
     public function editProduct()
     {
         $id = $_GET['id'] ?? null;
@@ -123,7 +109,6 @@ class DashboardController
 
         require_once './views/dashboard/edit-product.php';
     }
-
     public function updateProduct()
     {
         $id = $_POST['product_id'];
@@ -153,6 +138,53 @@ class DashboardController
         header('Location: ?act=productDashboard');
         exit;
     }
+
+    public function deleteProduct()
+    {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            // Lấy thông tin sản phẩm để có đường dẫn ảnh
+            $product = $this->modelProduct->getProductById($id);
+
+            if ($product) {
+                // Lấy đường dẫn ảnh
+                $imagePath = $product['image'];
+
+                // Xóa sản phẩm khỏi CSDL
+                $this->modelProduct->deleteProduct($id);
+
+                // Nếu có ảnh và file tồn tại, thì xóa file ảnh
+                if (!empty($imagePath) && file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+        }
+        header('Location: ?act=productDashboard');
+        exit;
+    }
+    public function addCategory()
+    {
+        require_once './views/dashboard/add-category.php';
+    }
+
+    public function saveCategory()
+    {
+        // Xử lý lưu danh mục
+        $categoryName = trim($_POST['category_name']);
+        $errors = [];
+
+        if (empty($categoryName)) $errors[] = "Vui lòng nhập tên danh mục";
+
+        if (empty($errors)) {
+            $this->modelCategory->insertCategory($categoryName);
+            header('Location: ?act=categoryDashboard');
+            exit;
+        } else {
+
+            require_once './views/dashboard/add-category.php';
+        }
+    }
+
     public function editCategory()
     {
         $id = $_GET['id'] ?? null;
@@ -178,30 +210,6 @@ class DashboardController
         exit;
     }
 
-    public function deleteProduct()
-    {
-        $id = $_GET['id'] ?? null;
-        if ($id) {
-            // Lấy thông tin sản phẩm để có đường dẫn ảnh
-            $product = $this->modelProduct->getProductById($id);
-
-            if ($product) {
-                // Lấy đường dẫn ảnh
-                $imagePath = $product['image'];
-
-                // Xóa sản phẩm khỏi CSDL
-                $this->modelProduct->deleteProduct($id);
-
-                // Nếu có ảnh và file tồn tại, thì xóa file ảnh
-                if (!empty($imagePath) && file_exists($imagePath)) {
-                    unlink($imagePath);
-                }
-            }
-        }
-        header('Location: ?act=productDashboard');
-        exit;
-    }
-
     public function deleteCategory()
     {
         $id = $_GET['id'] ?? null;
@@ -210,5 +218,74 @@ class DashboardController
         }
         header('Location: ?act=categoryDashboard');
         exit;
+    }
+    public function addUser()
+    {
+
+        require_once './views/dashboard/add-user.php';
+    }
+
+    public function saveUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_name = trim($_POST['user_name'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $password = trim($_POST['password'] ?? '');
+            $phone_number = trim($_POST['phone_number'] ?? '');
+            $role = $_POST['role'] ?? 'user';
+            $avatarFile = $_FILES['avatar'] ?? null;
+            $errors = [];
+
+            if (empty($user_name)) $errors[] = "Tên đăng nhập không được để trống.";
+            if (empty($email)) $errors[] = "Email không được để trống.";
+            if (empty($password)) $errors[] = "Mật khẩu không được để trống.";
+            if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Email không đúng định dạng.";
+            if ($this->modelUser->emailExists($email)) $errors[] = "Email đã tồn tại trong hệ thống.";
+            if (!empty($password) && strlen($password) < 6) $errors[] = "Mật khẩu phải có ít nhất 6 ký tự.";
+
+            if (empty($errors)) {
+                $avatarPath = null;
+                if ($avatarFile && $avatarFile['error'] == UPLOAD_ERR_OK) {
+                    // Giả sử bạn có một thư mục 'img/avatars' để lưu ảnh đại diện
+                    $avatarPath = uploadFile($avatarFile, 'uploads/avatar/');
+                    $this->modelUser->insertUser($user_name, $email, $password, $phone_number, $avatarPath, $role);
+                    header('Location: ?act=userDashboard');
+                    exit;
+                }
+            } else {
+                require_once './views/dashboard/add-user.php';
+            }
+        }
+    }
+
+    public function editUser()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: ?act=userDashboard');
+            exit;
+        }
+        $editUser = $this->modelUser->getUserById($id);
+
+        if (!$editUser) {
+            // Xử lý trường hợp không tìm thấy sản phẩm
+            echo "Tài khoản không tồn tại!";
+            exit;
+        }
+
+        require_once './views/dashboard/edit-product.php';
+    }
+
+    public function updateUser() {
+    }
+
+    public function deleteUser()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: ?act=userDashboard');
+            exit;
+        }
+        $deleteUser = $this->modelUser->deleteUser($id);
     }
 }

@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm sản phẩm - Admin Dashboard</title>
+    <title>Sửa tài khoản - Admin Dashboard</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/error.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="?act=productDashboard">
                             <i class="fas fa-box"></i>
                             <span>Sản phẩm</span>
@@ -44,7 +45,7 @@
                             <span>Bình luận</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="?act=userDashboard">
                             <i class="fas fa-users"></i>
                             <span>Tài khoản</span>
@@ -65,76 +66,74 @@
             <!-- Header -->
             <header class="content-header">
                 <div class="header-left">
-                    <h1>Thêm sản phẩm mới</h1>
+                    <h1>Sửa sản phẩm</h1>
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
-                        <?php
-                        if (session_status() == PHP_SESSION_NONE) {
-                            session_start();
-                        } ?>
-                        <?php if (isset($_SESSION['user'])) { ?>
-                            <span>Xin chào, <?php echo htmlspecialchars($_SESSION['user']['user_name']); ?></span>
-                        <?php } ?>
+                        <span>Xin chào, Admin</span>
                         <img src="img/User.svg" alt="Admin" class="admin-avatar">
                     </div>
                 </div>
             </header>
 
             <!-- Content Area -->
+            <!-- Content Area -->
             <div class="content-area">
                 <div class="form-container">
-                    <form action="?act=save-product" method="POST" enctype="multipart/form-data" class="admin-form">
-
-                        <?php include 'views/layouts/errors.php' ?>
+                    <form action="?act=update-user" method="POST" enctype="multipart/form-data" class="admin-form">
+                        <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['user_id'] ?? '') ?>">
+                        <input type="hidden" name="current_avatar" value="<?= htmlspecialchars($user['avatar'] ?? '') ?>">
 
                         <div class="form-group">
-                            <label for="product_name">Tên sản phẩm</label>
-                            <input type="text" id="product_name" name="product_name">
+                            <label for="user_name">Tên đăng nhập</label>
+                            <input type="text" id="user_name" name="user_name" value="<?= htmlspecialchars($user['user_name'] ?? '') ?>" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Mô tả</label>
-                            <textarea id="description" name="description" rows="4"></textarea>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" required>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="price">Giá</label>
-                                <input type="number" id="price" name="price">
-                            </div>
-                            <div class="form-group">
-                                <label for="quantity">Số lượng</label>
-                                <input type="number" id="quantity" name="quantity">
-                            </div>
-                            <div class="form-group">
-                                <label for="category_id">Danh mục</label>
-                                <select id="category_id" name="category_id">
-                                    <option value="">Chọn Danh Mục</option>
-                                    <?php foreach ($listCategories as $category) { ?>
-                                        <option value="<?= htmlspecialchars($category['category_id']) ?>">
-                                            <?= htmlspecialchars($category['category_name']) ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group"> <label for="hot">Sản phẩm hot</label>
-                                <input type="checkbox" id="hot" name="hot" class="hot-product-checkbox">
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label for="image">Hình ảnh</label>
-                            <input type="file" id="image" name="image" accept="image/*">
+                            <label for="phone_number">Số điện thoại</label>
+                            <input type="tel" id="phone_number" name="phone_number" value="<?= htmlspecialchars($user['phone_number'] ?? '') ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new_password">Mật khẩu mới (để trống nếu không muốn thay đổi)</label>
+                            <input type="password" id="new_password" name="new_password" placeholder="Nhập mật khẩu mới">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Vai trò</label>
+                            <select id="role" name="role" required>
+                                <option value="user" <?= (isset($user['role']) && $user['role'] == 'user') ? 'selected' : '' ?>>Người dùng</option>
+                                <option value="admin" <?= (isset($user['role']) && $user['role'] == 'admin') ? 'selected' : '' ?>>Quản trị</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="avatar">Ảnh đại diện mới (để trống nếu không muốn thay đổi)</label>
+                            <input type="file" id="avatar" name="avatar" accept="image/*">
+                            <?php
+                            $current_avatar = 'img/User.svg'; // Avatar mặc định
+                            if (!empty($user['avatar']) && file_exists($user['avatar'])) {
+                                $current_avatar = $user['avatar'];
+                            }
+                            ?>
+                            <?php if (!empty($current_avatar)) : ?>
+                                <p>Ảnh hiện tại: <img src="<?= htmlspecialchars($current_avatar) ?>" alt="Current Avatar" style="width: 100px; height: auto; margin-top: 10px;"></p>
+                            <?php endif; ?>
                         </div>
                 </div>
                 <div class=" form-actions">
-                    <a href="?act=productDashboard" class="btn btn-secondary">
+                    <a href="?act=userDashboard" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         Quay lại
                     </a>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i>
-                        Lưu sản phẩm
+                        Lưu thay đổi
                     </button>
                 </div>
                 </form>

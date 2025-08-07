@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh mục - Admin Dashboard</title>
+    <title>Quản lý tài khoản - Admin Dashboard</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/error.css">
@@ -32,19 +32,19 @@
                             <span>Sản phẩm</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="?act=categoryDashboard">
                             <i class="fas fa-tags"></i>
                             <span>Danh mục</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=commentDashboard">
+                        <a href="?act=commentDashboard"> 
                             <i class="fas fa-comments"></i>
                             <span>Bình luận</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="?act=userDashboard">
                             <i class="fas fa-users"></i>
                             <span>Tài khoản</span>
@@ -65,7 +65,7 @@
             <!-- Header -->
             <header class="content-header">
                 <div class="header-left">
-                    <h1>Quản lý danh mục</h1>
+                    <h1>Quản lý tài khoản</h1>
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
@@ -84,10 +84,10 @@
             <!-- Content Area -->
             <div class="content-area">
                 <div class="page-header">
-                    <h2>Danh sách danh mục</h2>
-                    <a href="?act=add-category" class="btn btn-primary">
+                    <h2>Danh sách tài khoản</h2>
+                    <a href="?act=add-user" class="btn btn-primary">
                         <i class="fas fa-plus"></i>
-                        Thêm danh mục
+                        Thêm tài khoản
                     </a>
                 </div>
 
@@ -96,29 +96,42 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên danh mục</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Ảnh đại diện</th>
+                                <th>Vai trò</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <?php foreach ($listCategories as $category) { ?>
-                            <tr>
-                                <tbody>
-                                    <tr>
-                                        <td><?= htmlspecialchars($category['category_id']) ?></td>
-                                        <td><?= htmlspecialchars($category['category_name']) ?></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <a href="?act=edit-category&id=<?= htmlspecialchars($category['category_id']) ?>" class="btn btn-sm btn-success">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="?act=delete-category&id=<?= htmlspecialchars($category['category_id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                        <tbody>
+                            <?php foreach ($listUsers as $user) { ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($user['user_id']) ?></td>
+                                    <td><?= htmlspecialchars($user['user_name']) ?></td>
+                                    <td><?= htmlspecialchars($user['email']) ?></td>
+                                    <td><?= htmlspecialchars($user['phone_number']) ?></td>
+                                    <td>
+                                        <?php $avatar = !empty($user['avatar']) && file_exists($user['avatar']) ? htmlspecialchars($user['avatar']) : 'img/User.svg'; ?>
+                                        <img src="<?= $avatar ?>" alt="Avatar" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $role = htmlspecialchars($user['role']);
+                                        $roleText = ($role == 'admin') ? 'Quản trị' : 'Người dùng';
+                                        $roleClass = ($role == 'admin') ? 'role-admin' : 'role-user';
+                                        ?>
+                                        <span class="status-badge <?= $roleClass ?>"><?= $roleText ?></span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <a href="?act=edit-user&id=<?= htmlspecialchars($user['user_id']) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                            <a href="?act=delete-user&id=<?= htmlspecialchars($user['user_id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php } ?>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -69,7 +69,13 @@
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
-                        <span>Xin chào, Admin</span>
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                        } ?>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            <span>Xin chào, <?php echo htmlspecialchars($_SESSION['user']['user_name']); ?></span>
+                        <?php } ?>
                         <img src="img/User.svg" alt="Admin" class="admin-avatar">
                     </div>
                 </div>

@@ -50,7 +50,7 @@ class UserModel
         try {
             // Hash password trước khi lưu
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            
+
             $sql = 'INSERT INTO users (user_name, email, password, phone_number, role) VALUES (:user_name, :email, :password, :phone_number, :role)';
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
@@ -66,9 +66,10 @@ class UserModel
             return false;
         }
     }
-    
+
     //Kiểm tra email đã tồn tại chưa
-    public function emailExists($email) {
+    public function emailExists($email)
+    {
         try {
             $sql = 'SELECT COUNT(*) FROM users WHERE email = :email';
             $stmt = $this->connection->prepare($sql);
@@ -85,5 +86,42 @@ class UserModel
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         return $stmt->fetchColumn();
+    }
+
+    public function getAllUsers()
+    {
+        $sql = "SELECT * FROM `users`";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insertUser($user_name, $email, $password, $phone_number, $avatarPath, $role)
+    {
+        try {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash password trước khi lưu
+            $sql = "INSERT INTO `users` (`user_name`, `email`, `password`, `phone_number`, `avatar`, `role`) VALUES (:user_name, :email, :password, :phone_number, :avatar, :role)";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute([
+                ':user_name' => $user_name,
+                ':email' => $email,
+                ':password' => $hashedPassword,
+                ':phone_number' => $phone_number,
+                ':avatar' => $avatarPath,
+                ':role' => $role
+            ]);
+            return $this->connection->lastInsertId();
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        $sql = "DELETE FROM `users` WHERE `user_id` = :id`";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

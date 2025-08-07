@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm sản phẩm - Admin Dashboard</title>
+    <title>Thêm tài khoản - Admin Dashboard</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/error.css">
@@ -26,7 +26,7 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="?act=productDashboard">
                             <i class="fas fa-box"></i>
                             <span>Sản phẩm</span>
@@ -44,7 +44,7 @@
                             <span>Bình luận</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="?act=userDashboard">
                             <i class="fas fa-users"></i>
                             <span>Tài khoản</span>
@@ -65,7 +65,7 @@
             <!-- Header -->
             <header class="content-header">
                 <div class="header-left">
-                    <h1>Thêm danh mục mới</h1>
+                    <h1>Thêm tài khoản mới</h1>
                 </div>
                 <div class="header-right">
                     <div class="admin-info">
@@ -84,23 +84,46 @@
             <!-- Content Area -->
             <div class="content-area">
                 <div class="form-container">
-                    <form action="?act=save-category" method="POST" enctype="multipart/form-data" class="admin-form">
+                    <form action="?act=save-user" method="POST" enctype="multipart/form-data" class="admin-form">
 
                         <?php include 'views/layouts/errors.php' ?>
 
                         <div class="form-group">
-                            <label for="category_name">Tên danh mục</label>
-                            <input type="text" id="category_name" name="category_name">
+                            <label for="user_name">Tên đăng nhập</label>
+                            <input type="text" id="user_name" name="user_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" id="password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Số điện thoại</label>
+                            <input type="tel" id="phone_number" name="phone_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="avatar">Ảnh đại diện</label>
+                            <input type="file" id="avatar" name="avatar">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Vai trò</label>
+                            <select id="role" name="role">
+                                <option value="user">Người dùng</option>
+                                <option value="admin">Quản trị"</option>
+                            </select>
                         </div>
                 </div>
                 <div class=" form-actions">
-                    <a href="?act=categoryDashboard" class="btn btn-secondary">
+                    <a href="?act=userDashboard" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         Quay lại
                     </a>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i>
-                        Lưu danh mục
+                        Lưu tài khoản
                     </button>
                 </div>
                 </form>

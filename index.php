@@ -28,29 +28,43 @@ match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
     'dashboard' => (new DashboardController())->index(),
-    
+
     // Dashboard routes
     'productDashboard' => (new DashboardController())->productDashboard(),
     'categoryDashboard' => (new DashboardController())->categoryDashboard(),
+    'userDashboard' => (new DashboardController())->userDashboard(),
+
 
     // Thêm sản phẩm, danh mục
     'add-product' => (new DashboardController())->addProduct(),
     'add-category' => (new DashboardController())->addCategory(),
+    'add-user' => (new DashboardController())->addUser(),
+
+
 
     // Chỉnh sửa sản phẩm, danh mục
     'edit-product' => (new DashboardController())->editProduct(),
     'edit-category' => (new DashboardController())->editCategory(),
+    'edit-user' => (new DashboardController())->editUser(),
+
 
     // Xử lý lưu sản phẩm, danh mục
     'save-product' => (new DashboardController())->saveProduct(),
     'save-category' => (new DashboardController())->saveCategory(),
+    'save-user' => (new DashboardController())->saveUser(),
+
     'update-product' => (new DashboardController())->updateProduct(),
     'update-category' => (new DashboardController())->updateCategory(),
+    'update-user' => (new DashboardController())->updateUser(),
+
+
 
     // Xử lý xóa sản phẩm, danh mục
     'delete-product' => (new DashboardController())->deleteProduct(),
     'delete-category' => (new DashboardController())->deleteCategory(),
-    
+    'delete-user' => (new DashboardController())->deleteUser(),
+
+
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
 
@@ -60,7 +74,7 @@ match ($action) {
     'login' => (new AuthController())->login(),
     // Trang đăng xuất
     'logout' => (new AuthController())->logout(),
-    
+
     // Mặc định nếu không có action nào khớp thì sẽ gọi trang chủ
     default => (new ProductController())->home(),
 };
