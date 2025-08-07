@@ -540,3 +540,41 @@ nav ul li:hover a {
   text-decoration: none;
   color: #07484a;
 }
+
+/* User section styling */
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-section .account {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.logout-icon:hover {
+  background-color: #f1f1f1;
+}
+
+.logout-icon svg {
+  transition: transform 0.2s ease;
+}
+
+.logout-icon:hover svg {
+  transform: scale(1.1);
+}
+/* User section styling */
