@@ -27,7 +27,8 @@ $action = $_GET['act'] ?? '/';
 match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
-    'dashboard' => (new DashboardController())->index(),
+    'detail' => (new ProductController())->detail(),
+    'dashboard' => (new DashboardController())->dashboard(),
 
     // Dashboard routes
     'productDashboard' => (new DashboardController())->productDashboard(),
@@ -72,8 +73,12 @@ match ($action) {
     'register' => (new AuthController())->register(),
     // Trang đăng nhập
     'login' => (new AuthController())->login(),
+    
     // Trang đăng xuất
     'logout' => (new AuthController())->logout(),
+
+    'logoutDB' => (new AuthController())->logoutDB(),
+
 
     // Mặc định nếu không có action nào khớp thì sẽ gọi trang chủ
     default => (new ProductController())->home(),

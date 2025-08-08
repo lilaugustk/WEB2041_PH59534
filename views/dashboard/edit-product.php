@@ -54,7 +54,7 @@
                 </ul>
             </nav>
             <div class="sidebar-footer">
-                <a href="?act=logout" class="logout-btn">
+                <a href="?act=logoutDB" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Đăng xuất</span>
                 </a>

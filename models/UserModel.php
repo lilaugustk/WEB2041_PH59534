@@ -117,9 +117,47 @@ class UserModel
         }
     }
 
+    public function updateUser($id, $user_name, $email, $password, $phone_number, $avatarPath, $role)
+    {
+        try {
+            // Bắt đầu câu lệnh SQL
+            $sql = "UPDATE `users` SET `user_name` = :user_name, `email` = :email, `phone_number` = :phone_number, `role` = :role";
+            $params = [
+                ':id' => $id,
+                ':user_name' => $user_name,
+                ':email' => $email,
+                ':phone_number' => $phone_number,
+                ':role' => $role
+            ];
+
+            // Chỉ cập nhật mật khẩu nếu nó không rỗng và băm nó
+            if (!empty($password)) {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $sql .= ", `password` = :password";
+                $params[':password'] = $hashedPassword;
+            }
+
+            // Chỉ cập nhật avatar nếu có đường dẫn mới (khác null)
+            if ($avatarPath !== null) {
+                $sql .= ", `avatar` = :avatar";
+                $params[':avatar'] = $avatarPath;
+            }
+
+            $sql .= " WHERE `user_id` = :id";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute($params);
+
+            return $stmt->rowCount() > 0;
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+            return false;
+        }
+    }
+
     public function deleteUser($id)
     {
-        $sql = "DELETE FROM `users` WHERE `user_id` = :id`";
+        $sql = "DELETE FROM `users` WHERE `user_id` = :id";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

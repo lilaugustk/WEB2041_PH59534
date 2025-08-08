@@ -19,9 +19,14 @@ class ProductController
         $hot = true; // Giả sử ta muốn lấy sản phẩm hot
         // Lấy danh sách sản phẩm hot
         $hotListProducts  = $this->modelProduct->getProductByHot($hot);
-        
+
         require_once './views/home.php';
     }
+    public function detail()
+    {
+        require_once './views/detail.php';
+    }
+
 
     public function category()
     {

@@ -13,7 +13,8 @@ class AuthController
     }
 
     //Xử lý đăng ký
-    public function register() {
+    public function register()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_name = trim($_POST['user_name'] ?? '');
             $email = trim($_POST['email'] ?? '');
@@ -60,7 +61,7 @@ class AuthController
                         exit;
                     }
                     // Nếu không lấy được user thì vẫn về trang login như cũ
-                    header('Location: ?act=login'); 
+                    header('Location: ?act=login');
                     exit;
                 } else {
                     $errors[] = "Đăng ký không thành công. Vui lòng thử lại.";
@@ -103,7 +104,6 @@ class AuthController
                     $errors[] = "Email hoặc mật khẩu không đúng";
                 }
             }
-
         }
         require_once './views/login.php';
     }
@@ -116,6 +116,15 @@ class AuthController
         header('Location: ?act=/');
         exit;
     }
+
+    public function logoutDB()
+    {
+        session_start();
+        session_destroy();
+        header('Location: ?act=login');
+        exit;
+    }
+
 
     // Kiểm tra đã đăng nhập hay chưa
     public function isLoggedIn()

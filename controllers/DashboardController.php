@@ -20,7 +20,7 @@ class DashboardController
         $this->modelCategory = new CategoryModel();
         $this->modelUser = new UserModel();
     }
-    public function index()
+    public function dashboard()
     {
         $totalProducts = $this->modelProduct->countProducts();
         $totalCategories = $this->modelCategory->countCategories();
@@ -33,6 +33,7 @@ class DashboardController
         ];
         require_once './views/dashboard/dashboard.php';
     }
+
 
     public function productDashboard()
     {
@@ -245,13 +246,14 @@ class DashboardController
 
             if (empty($errors)) {
                 $avatarPath = null;
+                // Xử lý upload file nếu có
                 if ($avatarFile && $avatarFile['error'] == UPLOAD_ERR_OK) {
-                    // Giả sử bạn có một thư mục 'img/avatars' để lưu ảnh đại diện
                     $avatarPath = uploadFile($avatarFile, 'uploads/avatar/');
-                    $this->modelUser->insertUser($user_name, $email, $password, $phone_number, $avatarPath, $role);
-                    header('Location: ?act=userDashboard');
-                    exit;
                 }
+                // Luôn chèn người dùng vào CSDL, dù có avatar hay không
+                $this->modelUser->insertUser($user_name, $email, $password, $phone_number, $avatarPath, $role);
+                header('Location: ?act=userDashboard');
+                exit;
             } else {
                 require_once './views/dashboard/add-user.php';
             }
@@ -265,27 +267,70 @@ class DashboardController
             header('Location: ?act=userDashboard');
             exit;
         }
-        $editUser = $this->modelUser->getUserById($id);
+        // Đổi tên biến thành $user để khớp với view
+        $user = $this->modelUser->getUserById($id);
 
-        if (!$editUser) {
-            // Xử lý trường hợp không tìm thấy sản phẩm
+        if (!$user) {
             echo "Tài khoản không tồn tại!";
             exit;
         }
 
-        require_once './views/dashboard/edit-product.php';
+        // Sửa lại view cho đúng
+        require_once './views/dashboard/edit-user.php';
     }
 
-    public function updateUser() {
+    public function updateUser()
+    {
+        $id = $_POST['user_id'];
+        $user_name = $_POST['user_name'];
+        $email = $_POST['email'];
+        // Lấy mật khẩu mới từ form, nếu có
+        $password = $_POST['new_password'] ?? '';
+        $phone_number = $_POST['phone_number'];
+        $role = $_POST['role'] ?? 'user';
+        $current_avatar = $_POST['current_avatar'] ?? null;
+        $avatarFile = $_FILES['avatar'] ?? null;
+
+        $avatarPath = $current_avatar; // Giữ lại avatar cũ làm mặc định
+
+        // Xử lý nếu có avatar mới được tải lên
+        if ($avatarFile && $avatarFile['error'] == UPLOAD_ERR_OK) {
+            $newAvatarPath = uploadFile($avatarFile, 'uploads/avatar/');
+            if ($newAvatarPath) {
+                // Nếu upload thành công, xóa avatar cũ nếu nó tồn tại và không phải là ảnh mặc định
+                if ($current_avatar && file_exists($current_avatar) && strpos($current_avatar, 'User.svg') === false) {
+                    unlink($current_avatar);
+                }
+                $avatarPath = $newAvatarPath; // Cập nhật đường dẫn avatar mới
+            }
+        }
+
+        // Gọi model để cập nhật, model đã xử lý việc chỉ update password khi nó không rỗng
+        $this->modelUser->updateUser($id, $user_name, $email, $password, $phone_number, $avatarPath, $role);
+        header('Location: ?act=userDashboard');
+        exit;
     }
 
     public function deleteUser()
     {
         $id = $_GET['id'] ?? null;
-        if (!$id) {
-            header('Location: ?act=userDashboard');
-            exit;
+        if ($id) {
+            // 1. Lấy thông tin người dùng để có đường dẫn avatar
+            $user = $this->modelUser->getUserById($id);
+
+            if ($user) {
+                // 2. Xóa người dùng khỏi CSDL
+                $this->modelUser->deleteUser($id);
+
+                // 3. Nếu có avatar và file tồn tại, thì xóa file avatar
+                $avatarPath = $user['avatar'];
+                if (!empty($avatarPath) && file_exists($avatarPath)) {
+                    unlink($avatarPath);
+                }
+            }
         }
-        $deleteUser = $this->modelUser->deleteUser($id);
+        // 4. Chuyển hướng về trang danh sách người dùng
+        header('Location: ?act=userDashboard');
+        exit;
     }
 }
