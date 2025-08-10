@@ -88,4 +88,20 @@
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         }
+
+        public function getCommentByProductId($id)
+        {
+            $sql = "
+                SELECT c.comment_id, c.content, c.date, 
+                    u.user_id, u.user_name, u.avatar
+                FROM comments c
+                INNER JOIN users u ON c.user_id = u.user_id
+                WHERE c.product_id = :id
+                ORDER BY c.date DESC
+            ";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }

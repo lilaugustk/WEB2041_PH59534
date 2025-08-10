@@ -36,7 +36,7 @@
                             <p>Giá:</p>
                             <p class="price-value"><?= number_format($hotProduct["price"]) ?> VNĐ</p>
                         </span>
-                        <a href="?action=detailProduct" class="button-detail">Xem chi tiết</a>
+                        <a href="?act=detailProduct&id=<?= $hotProduct["product_id"] ?>" class="button-detail">Xem chi tiết</a>
                     </div>
                 <?php } ?>
             </div>
@@ -64,7 +64,7 @@
                             <p>Giá:</p>
                             <p class="price-value"><?= number_format($product["price"]) ?> VNĐ</p>
                         </span>
-                        <a href="?action=detailProduct" class="button-detail">Xem chi tiết</a>
+                        <a href="?act=detailProduct&id=<?= $product["product_id"] ?>" class="button-detail">Xem chi tiết</a>
                     </div>
                 <?php } ?>
             </div>

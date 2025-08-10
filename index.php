@@ -27,7 +27,7 @@ $action = $_GET['act'] ?? '/';
 match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
-    'detail' => (new ProductController())->detail(),
+    'detailProduct' => (new ProductController())->detailProduct(),
     'dashboard' => (new DashboardController())->dashboard(),
 
     // Dashboard routes

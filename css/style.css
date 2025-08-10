@@ -584,8 +584,11 @@ nav ul li:hover a {
   width: 100%;
   height: 452px;
   display: flex;
-  margin: 60px 50px;
-  gap: 70px;
+  /* margin: 60px 50px; */
+  gap: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .detail-left {
   width: 800px;
@@ -625,6 +628,7 @@ nav ul li:hover a {
   font-size: 18px;
   line-height: 30px;
   font-weight: bold;
+  gap: 8px;
 }
 .detail-description {
   font-family: "Roboto", serif;
@@ -639,12 +643,110 @@ nav ul li:hover a {
   width: 100%;
   height: 68px;
   border-radius: 10px;
-  background-color: #07484a;
+  background-color: #70908b;
   color: #ffffff;
   text-transform: uppercase;
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
   margin-top: auto;
+  border: none;
 }
+.add-cart-btn:hover {
+  background-color: #07484a;
+}
+
+/* Comment Section CSS */
+.comment-section {
+  width: 80%;
+  max-width: 900px;
+  margin: 60px auto;
+  font-family: "Roboto", serif;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.comment-section h3 {
+  font-size: 32px;
+  font-family: "Playfair Display", serif;
+  color: #07484a;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0f6f1;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+/* Form for adding a new comment */
+.add-comment-box {
+  margin-bottom: 50px;
+}
+
+.add-comment-box textarea {
+  width: 100%;
+  height: 140px;
+  padding: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Roboto", serif;
+  resize: vertical;
+  margin-bottom: 20px;
+  background-color: #f8f9fa;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-comment-box textarea:focus {
+  outline: none;
+  border-color: #70908b;
+  box-shadow: 0 0 0 3px rgba(112, 144, 139, 0.2);
+}
+
+.add-comment-box button {
+  width: 200px;
+  height: 55px;
+  border: none;
+  border-radius: 8px;
+  background-color: #07484a;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 30px;
+}
+.add-comment-box form button:hover {
+  background-color: #07484a;
+  color: #ffffff;
+}
+.show-comment-box {
+  width: 80%;
+  height: 124px;
+  background-color: #eff2fc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px 0;
+}
+.info-comment {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.username-comment {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+.date-comment {
+  font-size: 12px;
+  color: #9397ad;
+}
+.content-comment {
+  width: 100%;
+  height: auto;
+  font-size: 16px;
+  color: #000;
+  margin-top: 10px;
+}
+
 /* Detail CSS */

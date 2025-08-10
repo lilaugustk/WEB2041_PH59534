@@ -22,8 +22,21 @@ class ProductController
 
         require_once './views/home.php';
     }
-    public function detail()
+    public function detailProduct()
     {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: ?act=/');
+            exit;
+        }
+        $detailProduct = $this->modelProduct->getProductById($id);
+        if (!$detailProduct) {
+            header('Location: ?act=/');
+            exit;
+        }
+        
+        // Lấy danh sách bình luận của sản phẩm
+        $listComment = $this->modelProduct->getCommentByProductId($id);
         require_once './views/detail.php';
     }
 
