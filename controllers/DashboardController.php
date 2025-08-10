@@ -2,6 +2,7 @@
 require_once './models/ProductModel.php';
 require_once './models/CategoryModel.php';
 require_once './models/UserModel.php';
+require_once './models/CommentModel.php';
 require_once './controllers/AuthController.php';
 
 
@@ -10,12 +11,14 @@ class DashboardController
     public $modelProduct;
     public $modelCategory;
     public $modelUser;
+    public $modelComment;
     public $authController;
     public function __construct()
     {
         $this->authController = new AuthController();
         $this->authController->requireAdmin(); // Bắt buộc phải là admin để truy cập
 
+        $this->modelComment = new CommentModel();
         $this->modelProduct = new ProductModel();
         $this->modelCategory = new CategoryModel();
         $this->modelUser = new UserModel();
@@ -25,11 +28,13 @@ class DashboardController
         $totalProducts = $this->modelProduct->countProducts();
         $totalCategories = $this->modelCategory->countCategories();
         $totalUsers = $this->modelUser->countUsers();
+        $totalComments = $this->modelComment->countComments();
 
         $totalData = [
             'totalProducts' => $totalProducts,
             'totalCategories' => $totalCategories,
             'totalUsers' => $totalUsers,
+            'totalComments' => $totalComments,
         ];
         require_once './views/dashboard/dashboard.php';
     }
@@ -51,6 +56,34 @@ class DashboardController
     {
         $listUsers = $this->modelUser->getAllUsers();
         require_once './views/dashboard/userDashboard.php';
+    }
+
+    public function commentDashboard()
+    {
+        $listComments = $this->modelComment->getAllComments();
+        require_once './views/dashboard/commentDashboard.php';
+    }
+
+    public function updateCommentStatus()
+    {
+        $comment_id = $_GET['id'] ?? null;
+        $status = $_GET['status'] ?? 0;
+
+        if ($comment_id) {
+            $this->modelComment->updateCommentStatus($comment_id, $status);
+        }
+        header('Location: ?act=commentDashboard');
+        exit;
+    }
+
+    public function deleteComment()
+    {
+        $comment_id = $_GET['id'] ?? null;
+        if ($comment_id) {
+            $this->modelComment->deleteComment($comment_id);
+        }
+        header('Location: ?act=commentDashboard');
+        exit;
     }
 
     public function addProduct()

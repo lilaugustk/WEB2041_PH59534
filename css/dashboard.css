@@ -414,6 +414,21 @@ body {
   background-color: #f8d7da;
   color: #721c24;
 }
+.status-badge.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+
 
 /* Action buttons */
 .action-buttons {

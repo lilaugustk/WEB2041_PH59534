@@ -4,13 +4,17 @@ require_once './models/CategoryModel.php';
 // có class chứa các function thực thi xử lý logic 
 class ProductController
 {
+    // ... (các thuộc tính khác)
     public $modelProduct;
     public $modelCategory;
+
+    public $modelComment;
 
     public function __construct()
     {
         $this->modelProduct = new ProductModel();
         $this->modelCategory = new CategoryModel();
+        $this->modelComment = new CommentModel();
     }
 
     public function home()
@@ -34,9 +38,9 @@ class ProductController
             header('Location: ?act=/');
             exit;
         }
-        
+
         // Lấy danh sách bình luận của sản phẩm
-        $listComment = $this->modelProduct->getCommentByProductId($id);
+        $listComment = $this->modelComment->getCommentsByProductId($id);
         require_once './views/detail.php';
     }
 

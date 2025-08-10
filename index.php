@@ -34,6 +34,7 @@ match ($action) {
     'productDashboard' => (new DashboardController())->productDashboard(),
     'categoryDashboard' => (new DashboardController())->categoryDashboard(),
     'userDashboard' => (new DashboardController())->userDashboard(),
+    'commentDashboard' => (new DashboardController())->commentDashboard(),
 
 
     // Thêm sản phẩm, danh mục
@@ -64,6 +65,8 @@ match ($action) {
     'delete-product' => (new DashboardController())->deleteProduct(),
     'delete-category' => (new DashboardController())->deleteCategory(),
     'delete-user' => (new DashboardController())->deleteUser(),
+    'delete-comment' => (new DashboardController())->deleteComment(),
+    'update-comment-status' => (new DashboardController())->updateCommentStatus(),
 
 
     // Trang danh mục sản phẩm

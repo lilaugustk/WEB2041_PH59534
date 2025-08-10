@@ -113,6 +113,15 @@
                             <p>Người dùng</p>
                         </div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3><?= htmlspecialchars($totalData['totalComments'] ?? 0) ?></h3>
+                            <p>Bình luận</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="dashboard-sections">
