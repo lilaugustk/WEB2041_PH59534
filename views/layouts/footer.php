@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="info-footer-box">
-                <p class="info-title">Nội dung pháp lý</p>
+                <p class="info-title">Nội Dung Pháp Lý</p>
                 <div class="info-list-box">
                     <a href="">Vận chuyển & Giao hàng</a>
                     <a href="">Điều khoản & Điều kiện</a>

@@ -67,12 +67,4 @@ class ProductController
         // Gọi view để hiển thị danh sách sản phẩm theo danh mục
         require './views/category.php';
     }
-    public function register()
-    {
-        require_once './views/register.php';
-    }
-    public function login()
-    {
-        require_once './views/login.php';
-    }
 }

@@ -24,7 +24,7 @@
             <div class="category-nav">
                 <ul>
                     <li>
-                        <a href="?act=category" class="<?= !$categoryId ? 'active' : '' ?>">Tất cả sản phẩm</a>
+                        <a href="?act=category" class="<?= !$categoryId ? 'active' : '' ?>">Tất Cả Sản Phẩm</a>
                     </li>
                     <?php foreach ($listCategories as $category) : ?>
                         <li>
@@ -61,4 +61,5 @@
         <?php include 'views/layouts/footer.php'; ?>
     </div>
 </body>
+
 </html>

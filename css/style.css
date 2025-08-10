@@ -237,20 +237,6 @@ header ul li a {
 .button-more-box a {
   text-decoration: none;
 }
-.button-category {
-  width: 265px;
-  height: 72px;
-  padding: 20px 24px;
-  border: none;
-  border-radius: 10px;
-  background-color: #70908b;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Playfair Display", serif;
-  margin: 20px 0;
-  cursor: pointer;
-}
 .button-more {
   width: 265px;
   height: 72px;
@@ -268,29 +254,6 @@ header ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.button-more-page {
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 25px;
-  background-color: #70908b;
-  color: #ffffff;
-  /* font-size: 18px;
-  font-weight: bold;
-  font-family: "Playfair Display", serif; */
-  margin: 20px 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-}
-.button-more-page:hover,
-.button-more-page:focus {
-  background: #07484a;
-  color: #fff;
 }
 /* Content Home Page CSS */
 
@@ -445,7 +408,7 @@ nav {
 nav ul {
   display: flex;
   list-style: none;
-  gap: auto;
+  gap: 20px;
 }
 nav ul li {
   padding: 0 18px;

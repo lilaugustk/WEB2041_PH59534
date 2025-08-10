@@ -64,27 +64,6 @@ class DashboardController
         require_once './views/dashboard/commentDashboard.php';
     }
 
-    public function updateCommentStatus()
-    {
-        $comment_id = $_GET['id'] ?? null;
-        $status = $_GET['status'] ?? 0;
-
-        if ($comment_id) {
-            $this->modelComment->updateCommentStatus($comment_id, $status);
-        }
-        header('Location: ?act=commentDashboard');
-        exit;
-    }
-
-    public function deleteComment()
-    {
-        $comment_id = $_GET['id'] ?? null;
-        if ($comment_id) {
-            $this->modelComment->deleteComment($comment_id);
-        }
-        header('Location: ?act=commentDashboard');
-        exit;
-    }
 
     public function addProduct()
     {
@@ -159,7 +138,7 @@ class DashboardController
         $newImageFile = $_FILES['image'] ?? null;
         if ($newImageFile && $newImageFile['error'] == UPLOAD_ERR_OK) {
             // Upload ảnh mới
-            $newImagePath = uploadFile($newImageFile, 'imgproduct');
+            $newImagePath = uploadFile($newImageFile, 'uploads/imgproduct/');
 
             // Nếu upload thành công và có ảnh cũ, hãy xóa ảnh cũ đi
             if ($newImagePath && !empty($image) && file_exists($image)) {
@@ -251,6 +230,31 @@ class DashboardController
             $this->modelCategory->deleteCategory($id);
         }
         header('Location: ?act=categoryDashboard');
+        exit;
+    }
+
+    public function addComment() {
+        
+    }
+    public function updateCommentStatus()
+    {
+        $comment_id = $_GET['id'] ?? null;
+        $status = $_GET['status'] ?? 0;
+
+        if ($comment_id) {
+            $this->modelComment->updateCommentStatus($comment_id, $status);
+        }
+        header('Location: ?act=commentDashboard');
+        exit;
+    }
+
+    public function deleteComment()
+    {
+        $comment_id = $_GET['id'] ?? null;
+        if ($comment_id) {
+            $this->modelComment->deleteComment($comment_id);
+        }
+        header('Location: ?act=commentDashboard');
         exit;
     }
     public function addUser()
