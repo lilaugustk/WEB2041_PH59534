@@ -445,7 +445,7 @@ nav {
 nav ul {
   display: flex;
   list-style: none;
-  gap: 50px;
+  gap: auto;
 }
 nav ul li {
   padding: 0 18px;
@@ -454,7 +454,7 @@ nav ul li a {
   color: #07484a;
   font-family: "Playfair Display", serif;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   text-decoration: none;
 }
 nav ul li:hover a {

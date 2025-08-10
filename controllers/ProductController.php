@@ -50,6 +50,9 @@ class ProductController
         // Lấy category_id từ URL, ví dụ: ?act=category&id=1
         $categoryId = $_GET['id'] ?? null;
 
+        // Lấy tất cả danh mục để hiển thị menu
+        $listCategories = $this->modelCategory->getAllCategories();
+
         if ($categoryId) {
             // Lấy sản phẩm theo category id
             $listProducts = $this->modelProduct->getProductsByCategory($categoryId);
@@ -61,13 +64,7 @@ class ProductController
             $listProducts = $this->modelProduct->getAllProduct();
             $categoryName = 'Tất cả sản phẩm';
         }
-        // Truyền biến danh sách sản phẩm và tên danh mục vào view
-        $data = [
-            'listProducts' => $listProducts,
-            'categoryName' => $categoryName,
-        ];
         // Gọi view để hiển thị danh sách sản phẩm theo danh mục
-        // Truyền biến vào view
         require './views/category.php';
     }
     public function register()

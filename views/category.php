@@ -24,42 +24,41 @@
             <div class="category-nav">
                 <ul>
                     <li>
-                        <a href="?act=category&id=1">Phòng Ngủ</a>
+                        <a href="?act=category" class="<?= !$categoryId ? 'active' : '' ?>">Tất cả sản phẩm</a>
                     </li>
-                    <li>
-                        <a href="?act=category&id=2">Phòng Ăn</a>
-                    </li>
-                    <li>
-                        <a href="?act=category&id=3">Phòng Làm Việc</a>
-                    </li>
-                    <li>
-                        <a href="?act=category&id=4">Phòng Khách</a>
-                    </li>
-                    <li>
-                        <a href="?act=category&id=5">Phòng Bếp</a>
-                    </li>
-                    <li>
-                        <a href="?act=category&id=6">Phòng Họp</a>
-                    </li>
-                    <li>
-                        <a href="?act=category&id=7">Phòng Tắm</a>
-                    </li>
+                    <?php foreach ($listCategories as $category) : ?>
+                        <li>
+                            <a href="?act=category&id=<?= htmlspecialchars($category['category_id']) ?>" class="<?= ($categoryId == $category['category_id']) ? 'active' : '' ?>">
+                                <?= htmlspecialchars($category['category_name']) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </nav>
         <article>
-            <div class="content-title"> <?= $categoryName ?> </div>
-            <script>
-                var categoryProducts = <?php echo json_encode($listProducts, JSON_UNESCAPED_UNICODE); ?>;
-            </script>
-            <div class="product-box product-box-tiny" id="category-list"></div>
-            <div class="button-more-box" id="category-pagination" style="gap:8px;display:flex;justify-content:center;align-items:center;"></div>
-            <div class="button-more-box"><button class="button-category">Khám Phá</button>
+            <div class="content-title"> <?= htmlspecialchars($categoryName) ?> </div>
+            <div class="product-box product-box-tiny">
+                <?php if (!empty($listProducts)) : ?>
+                    <?php foreach ($listProducts as $product) : ?>
+                        <div class="content-item">
+                            <img src="<?= htmlspecialchars($product["image"]) ?>" alt="<?= htmlspecialchars($product["product_name"]) ?>">
+                            <p class="name"><?= htmlspecialchars($product["product_name"]) ?></p>
+                            <span class="price">
+                                <p>Giá:</p>
+                                <p class="price-value"><?= number_format($product["price"]) ?> VNĐ</p>
+                            </span>
+                            <a href="?act=detailProduct&id=<?= $product["product_id"] ?>" class="button-detail">Xem chi tiết</a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p style="text-align: center; padding: 40px; color: #6c757d;">Không có sản phẩm nào trong danh mục này.</p>
+                <?php endif; ?>
             </div>
+            <div class="button-more-box"><a href="?act=category"><button class="button-more">Tất Cả Sản Phẩm</button></a>
+            </div>
+        </article>
+        <?php include 'views/layouts/footer.php'; ?>
     </div>
-    </article>
-    <?php include 'views/layouts/footer.php'; ?> </div>
 </body>
-
-
 </html>
