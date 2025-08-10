@@ -100,13 +100,13 @@
                             <?php foreach ($listComments as $comment) : ?>
                                 <tr>
                                     <td><?= htmlspecialchars($comment['comment_id']) ?></td>
-                                    <td style="text-align: left; max-width: 300px;"><?= htmlspecialchars($comment['content']) ?></td>
+                                    <td class="comment-content-cell"><?= nl2br(htmlspecialchars($comment['content'])) ?></td>
                                     <td><?= htmlspecialchars($comment['user_name']) ?></td>
                                     <td><a href="?act=detailProduct&id=<?= $comment['product_id'] ?>" target="_blank"><?= htmlspecialchars($comment['product_name']) ?></a></td>
                                     <td><?= date('d/m/Y H:i', strtotime($comment['date'])) ?></td>
                                     <td>
                                         <span class="status-badge <?= $comment['status'] == 1 ? 'status-active' : 'status-pending' ?>">
-                                            <?= $comment['status'] == 1 ? 'Đã duyệt' : 'Chờ duyệt' ?>
+                                            <?= $comment['status'] == 1 ? 'Duyệt' : 'Ẩn' ?>
                                         </span>
                                     </td>
                                     <td>

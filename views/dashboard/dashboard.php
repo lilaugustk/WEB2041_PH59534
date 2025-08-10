@@ -81,9 +81,7 @@
                 </div>
             </header>
 
-            <!-- Content Area -->
             <div class="content-area">
-                <!-- Dashboard Overview -->
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon">

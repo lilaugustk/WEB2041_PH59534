@@ -30,7 +30,7 @@
             <div class="product-box" id="product-slideshow">
                 <?php foreach ($hotListProducts as $index => $hotProduct) { ?>
                     <div class="content-item slide-item" data-index="<?= $index ?>">
-                        <img src="img/Banner.jpg" alt="notfound">
+                        <img src="<?= $hotProduct["image"] ?>" alt="notfound">
                         <p class="name"><?= $hotProduct["product_name"] ?></p>
                         <span class="price">
                             <p>Giá:</p>
@@ -58,7 +58,7 @@
                 <?php foreach ($listProducts as $index => $product) {
                     if ($index >= 9) break; ?>
                     <div class="content-item" data-index="<?= $index ?>">
-                        <img src="img/Banner.jpg" alt="notfound">
+                        <img src="<?= $product["image"] ?>" alt="notfound">
                         <p class="name"><?= $product["product_name"] ?></p>
                         <span class="price">
                             <p>Giá:</p>

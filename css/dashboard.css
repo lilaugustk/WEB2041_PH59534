@@ -414,6 +414,25 @@ body {
   background-color: #f8d7da;
   color: #721c24;
 }
+
+.data-table td.comment-content-cell {
+  text-align: left;
+  max-width: 350px; /* Increased max-width */
+  white-space: normal; /* Ensure text wraps */
+  line-height: 1.5; /* Improve readability */
+  font-size: 0.9rem;
+}
+
+.data-table td a {
+  color: #07484a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.data-table td a:hover {
+  color: #70908b;
+  text-decoration: underline;
+}
 .status-badge.status-pending {
   background-color: #fff3cd;
   color: #856404;

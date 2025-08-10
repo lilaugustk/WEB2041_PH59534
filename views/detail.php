@@ -59,9 +59,11 @@
                             <img src="<?= htmlspecialchars(!empty($comment['avatar']) ? $comment['avatar'] : 'img/User.svg') ?>" alt="Avatar của <?= htmlspecialchars($comment['user_name']) ?>">
                         </div>
                         <div class="comment-content">
-                            <p class="comment-author"><?= htmlspecialchars($comment['user_name']) ?></p>
-                            <p class="comment-date"><?= date('H:i, d/m/Y', strtotime($comment['date'])) ?></p>
-                            <p class="comment-text"><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
+                            <div class="comment-header">
+                                <p class="comment-author"><?= htmlspecialchars($comment['user_name']) ?></p>
+                                <p class="comment-date"><?= date('H:i, d/m/Y', strtotime($comment['date'])) ?></p>
+                            </div>
+                            <div class="comment-text"><?= nl2br(htmlspecialchars($comment['content'])) ?></div>
                         </div>
                     </li>
                 <?php endforeach; ?>
