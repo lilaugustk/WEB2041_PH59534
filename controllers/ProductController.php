@@ -67,4 +67,31 @@ class ProductController
         // Gọi view để hiển thị danh sách sản phẩm theo danh mục
         require './views/category.php';
     }
+
+    public function postComment()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Bắt đầu session để lấy thông tin người dùng
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (!isset($_SESSION['user']['user_id'])) {
+                // Nếu chưa đăng nhập, chuyển hướng về trang đăng nhập
+                header('Location: ?act=login');
+                exit;
+            }
+
+            $product_id = $_POST['product_id'] ?? null;
+            $user_id = $_SESSION['user']['user_id'];
+            $content = trim($_POST['content'] ?? '');
+
+            if ($product_id && !empty($content)) {
+                $this->modelComment->insertComment($product_id, $user_id, $content);
+            }
+            header('Location: ?act=detailProduct&id=' . $product_id);
+            exit;
+        }
+    }
 }

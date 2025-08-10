@@ -39,6 +39,18 @@ class CommentModel
         $stmt->execute();
     }
 
+    public function insertComment($product_id, $user_id, $content)
+    {
+        $sql = "INSERT INTO comments (product_id, user_id, content, date, status) 
+                VALUES (:product_id, :user_id, :content, NOW(), 0)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+        $stmt->execute();
+        return $this->connection->lastInsertId();
+    }
+
     // Cập nhật trạng thái bình luận 
     public function updateCommentStatus($comment_id, $status)
     {

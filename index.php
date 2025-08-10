@@ -66,6 +66,9 @@ match ($action) {
     'delete-category' => (new DashboardController())->deleteCategory(),
     'delete-user' => (new DashboardController())->deleteUser(),
     'delete-comment' => (new DashboardController())->deleteComment(),
+
+
+    'post-comment' => (new ProductController())->postComment(),
     'update-comment-status' => (new DashboardController())->updateCommentStatus(),
 
 

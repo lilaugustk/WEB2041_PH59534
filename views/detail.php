@@ -38,7 +38,7 @@
         <!-- Form to add a new comment -->
         <div class="add-comment-box">
             <?php if (isset($_SESSION['user'])) : ?>
-                <form action="?act=add-comment" method="POST">
+                <form action="?act=post-comment" method="POST">
                     <input type="hidden" name="product_id" value="<?= htmlspecialchars($detailProduct['product_id']) ?>">
                     <textarea name="content" placeholder="Viết đánh giá của bạn..." required></textarea>
                     <button type="submit">Gửi bình luận</button>

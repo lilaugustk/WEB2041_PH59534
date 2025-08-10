@@ -111,7 +111,7 @@
                                     <td>
                                         <img src="<?= htmlspecialchars($product['image']) ?>" alt="Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                                     </td>
-                                    <td><?= htmlspecialchars($product['product_name']) ?></td>
+                                    <td><a href="?act=detailProduct&id=<?= $product['product_id'] ?>" target="_blank"><?= htmlspecialchars($product['product_name']) ?></a></td>
                                     <td><?= htmlspecialchars($product['category_name']) ?></td>
                                     <td><?= number_format(htmlspecialchars($product['price'])) ?> VNĐ</td>
                                     <td><?= htmlspecialchars($product['quantity']) ?></td>

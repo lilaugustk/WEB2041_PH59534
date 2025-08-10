@@ -233,9 +233,6 @@ class DashboardController
         exit;
     }
 
-    public function addComment() {
-        
-    }
     public function updateCommentStatus()
     {
         $comment_id = $_GET['id'] ?? null;
