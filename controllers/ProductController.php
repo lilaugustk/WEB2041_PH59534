@@ -33,6 +33,10 @@ class ProductController
             header('Location: ?act=/');
             exit;
         }
+        $listProducts  = $this->modelProduct->getAllProduct();
+        $hot = true; // Giả sử ta muốn lấy sản phẩm hot
+        // Lấy danh sách sản phẩm hot
+        $hotListProducts  = $this->modelProduct->getProductByHot($hot);
         $detailProduct = $this->modelProduct->getProductById($id);
         if (!$detailProduct) {
             header('Location: ?act=/');
@@ -43,7 +47,6 @@ class ProductController
         $listComment = $this->modelComment->getCommentsByProductId($id);
         require_once './views/detail.php';
     }
-
 
     public function category()
     {

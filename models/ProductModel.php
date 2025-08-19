@@ -59,9 +59,11 @@
 
         public function getProductById($id)
         {
-            $sql = "SELECT * FROM `products` WHERE `product_id` = :id";
+            $sql = "SELECT * FROM `products` 
+                    INNER JOIN `categories` ON `products`.`category_id` = `categories`.`category_id` 
+                    WHERE `products`.`product_id` = :id";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);   
             $stmt->execute();
             return $stmt->fetch();
         }
@@ -88,6 +90,4 @@
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         }
-
-
     }

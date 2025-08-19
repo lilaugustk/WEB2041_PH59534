@@ -9,6 +9,7 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/ProductController.php';
 require_once './controllers/AuthController.php'; // Controller xử lý đăng nhập, đăng ký
 require_once './controllers/DashboardController.php'; // Controller xử lý đăng nhập, đăng ký
+require_once './controllers/CartController.php'; // Controller xử lý giỏ hàng
 
 
 // Require toàn bộ file Models
@@ -27,7 +28,6 @@ $action = $_GET['act'] ?? '/';
 match ($action) {
     // Trang chủ
     '/' => (new ProductController())->home(),
-    'detailProduct' => (new ProductController())->detailProduct(),
     'dashboard' => (new DashboardController())->dashboard(),
 
     // Dashboard routes
@@ -71,15 +71,20 @@ match ($action) {
     'post-comment' => (new ProductController())->postComment(),
     'update-comment-status' => (new DashboardController())->updateCommentStatus(),
 
-
+    // Trang giỏ hàng
+    'cart' => (new CartController())->showCart(),
+    'add-to-cart' => (new CartController())->addToCart(),
+    'update-cart' => (new CartController())->updateCart(),
+    'remove-from-cart' => (new CartController())->removeFromCart(),
+    // Trang chi tiết sản phẩm
+    'detailProduct' => (new ProductController())->detailProduct(),
     // Trang danh mục sản phẩm
     'category' => (new ProductController())->category(),
-
     // Trang đăng ký
     'register' => (new AuthController())->register(),
     // Trang đăng nhập
     'login' => (new AuthController())->login(),
-    
+
     // Trang đăng xuất
     'logout' => (new AuthController())->logout(),
 
