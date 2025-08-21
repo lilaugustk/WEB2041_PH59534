@@ -47,8 +47,8 @@ match ($action) {
     // Chỉnh sửa sản phẩm, danh mục
     'edit-product' => (new DashboardController())->editProduct(),
     'edit-category' => (new DashboardController())->editCategory(),
-    'edit-user' => (new DashboardController())->editUser(),
-
+    // 'edit-user' => (new DashboardController())->editUser(),
+    'view-user' => (new DashboardController())->viewUser(),
 
     // Xử lý lưu sản phẩm, danh mục
     'save-product' => (new DashboardController())->saveProduct(),
@@ -79,7 +79,7 @@ match ($action) {
     'register' => (new AuthController())->register(),
     // Trang đăng nhập
     'login' => (new AuthController())->login(),
-    
+
     // Trang đăng xuất
     'logout' => (new AuthController())->logout(),
 

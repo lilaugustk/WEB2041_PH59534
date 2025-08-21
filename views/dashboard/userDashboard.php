@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="?act=commentDashboard"> 
+                        <a href="?act=commentDashboard">
                             <i class="fas fa-comments"></i>
                             <span>Bình luận</span>
                         </a>
@@ -125,7 +125,9 @@
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="?act=edit-user&id=<?= htmlspecialchars($user['user_id']) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                            <a href="?act=view-user&id=<?= htmlspecialchars($user['user_id']) ?>" class="btn btn-sm btn-info" title="Xem">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
                                             <a href="?act=delete-user&id=<?= htmlspecialchars($user['user_id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </td>

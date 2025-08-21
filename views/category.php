@@ -24,11 +24,11 @@
             <div class="category-nav">
                 <ul>
                     <li>
-                        <a href="?act=category" class="<?= !$categoryId ? 'active' : '' ?>">Tất Cả Sản Phẩm</a>
+                        <a href="?act=category#product-list" class="<?= !$categoryId ? 'active' : '' ?>">Tất Cả Sản Phẩm</a>
                     </li>
                     <?php foreach ($listCategories as $category) : ?>
                         <li>
-                            <a href="?act=category&id=<?= htmlspecialchars($category['category_id']) ?>" class="<?= ($categoryId == $category['category_id']) ? 'active' : '' ?>">
+                            <a href="?act=category&id=<?= htmlspecialchars($category['category_id']) ?>#product-list" class="<?= ($categoryId == $category['category_id']) ? 'active' : '' ?>">
                                 <?= htmlspecialchars($category['category_name']) ?>
                             </a>
                         </li>
@@ -36,7 +36,7 @@
                 </ul>
             </div>
         </nav>
-        <article>
+        <article id="product-list">
             <div class="content-title"> <?= htmlspecialchars($categoryName) ?> </div>
             <div class="product-box product-box-tiny">
                 <?php if (!empty($listProducts)) : ?>

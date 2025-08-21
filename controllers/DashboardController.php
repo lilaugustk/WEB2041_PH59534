@@ -294,23 +294,20 @@ class DashboardController
         }
     }
 
-    public function editUser()
+    public function viewUser()
     {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             header('Location: ?act=userDashboard');
             exit;
         }
-        // Đổi tên biến thành $user để khớp với view
         $user = $this->modelUser->getUserById($id);
 
         if (!$user) {
             echo "Tài khoản không tồn tại!";
             exit;
         }
-
-        // Sửa lại view cho đúng
-        require_once './views/dashboard/edit-user.php';
+        require_once './views/dashboard/view-user.php';
     }
 
     public function updateUser()
