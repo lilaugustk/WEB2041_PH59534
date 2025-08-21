@@ -55,8 +55,6 @@
                     <p style="text-align: center; padding: 40px; color: #6c757d;">Không có sản phẩm nào trong danh mục này.</p>
                 <?php endif; ?>
             </div>
-            <div class="button-more-box"><a href="?act=category"><button class="button-more">Tất Cả Sản Phẩm</button></a>
-            </div>
         </article>
         <?php include 'views/layouts/footer.php'; ?>
     </div>
