@@ -31,20 +31,18 @@
                 </a>
                 <a href="?act=cart" class="cart-icon">
                     <img src="img/Cart.svg" alt="notfound">
-                    <?php
-                    // Đảm bảo session đã được bắt đầu
-                    if (session_status() == PHP_SESSION_NONE) {
-                        session_start();
-                    }
-                    $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
-                    if ($cartCount > 0) : ?>
-                        <span class="cart-count"><?= $cartCount ?></span>
-                    <?php endif; ?>
-                </a>
-                <?php
+                                    <?php
+                // Đảm bảo session đã được bắt đầu
                 if (session_status() == PHP_SESSION_NONE) {
                     session_start();
                 }
+                $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+                if ($cartCount > 0) : ?>
+                    <span class="cart-count"><?= $cartCount ?></span>
+                <?php endif; ?>
+                </a>
+                <?php
+                // Không cần session_start() lại vì đã gọi ở trên
                 ?>
                 <?php if (isset($_SESSION['user'])): ?>
                     <div class="user-section">

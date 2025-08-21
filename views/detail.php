@@ -45,9 +45,9 @@
                 <div class="quantity-selector">
                     <label for="quantity">Số lượng:</label>
                     <div class="quantity-stepper">
-                        <button type="button" class="quantity-down">-</button>
+                        <button type="button" class="quantity-down quantity-btn">-</button>
                         <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?= htmlspecialchars($detailProduct['quantity']) ?>" class="quantity-input" readonly>
-                        <button type="button" class="quantity-up">+</button>
+                        <button type="button" class="quantity-up quantity-btn">+</button>
                     </div>
                 </div>
 

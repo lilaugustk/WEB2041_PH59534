@@ -80,6 +80,20 @@ class UserModel
             return false;
         }
     }
+    //Kiểm tra số điện thoại đã tồn tại chưa
+    public function phoneNumberExists($phone_number)
+    {
+        try {
+            $sql = 'SELECT COUNT(*) FROM users WHERE email = :email';
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute([':phone_number' => $phone_number]);
+            return $stmt->fetchColumn() > 0; // Trả về true nếu số điện thoại đã tồn tại
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+            return false;
+        }
+    }
+
     public function countUsers()
     {
         $sql = "SELECT COUNT(*) FROM `users`";

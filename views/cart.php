@@ -32,7 +32,7 @@
                     <div class="cart-header">
                         <h2><i class="fas fa-shopping-bag"></i> Sản phẩm trong giỏ hàng</h2>
                     </div>
-                    
+
                     <form action="?act=update-cart" method="POST">
                         <div class="cart-table-wrapper">
                             <table class="cart-table">
@@ -83,7 +83,7 @@
                                                 <span class="subtotal-value"><?= number_format($item_total) ?> VNĐ</span>
                                             </td>
                                             <td class="product-remove">
-                                                <a href="?act=remove-from-cart&id=<?= $productId ?>" class="remove-btn" title="Xóa sản phẩm" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+                                                <a href="?act=remove-from-cart&id=<?= $productId ?>" class="remove-btn" title="Xóa sản phẩm">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -92,7 +92,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                         <div class="cart-actions">
                             <a href="?act=category" class="button-secondary">
                                 <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
@@ -108,7 +107,7 @@
                     <div class="summary-header">
                         <h2><i class="fas fa-calculator"></i> Tổng cộng giỏ hàng</h2>
                     </div>
-                    
+
                     <div class="summary-content">
                         <div class="summary-item">
                             <span class="summary-label">Tạm tính</span>
@@ -124,7 +123,7 @@
                             <span class="total-price"><?= number_format($subtotal) ?> VNĐ</span>
                         </div>
                     </div>
-                    
+
                     <div class="summary-actions">
                         <a href="?act=checkout" class="button-checkout">
                             <i class="fas fa-credit-card"></i> Tiến hành thanh toán

@@ -71,6 +71,7 @@ function initCart() {
         input.value = newValue;
         updateProductSubtotal(input, productId);
         updateCartTotal();
+        updateCartCount(); // Cập nhật số lượng trên header
       }
     });
   });
@@ -83,6 +84,7 @@ function initCart() {
       if (productId) {
         updateProductSubtotal(this, productId);
         updateCartTotal();
+        updateCartCount(); // Cập nhật số lượng trên header
       }
     });
   });
@@ -93,6 +95,11 @@ function initCart() {
     btn.addEventListener("click", function (e) {
       if (!confirm("Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?")) {
         e.preventDefault();
+      } else {
+        // Cập nhật số lượng sau khi xóa
+        setTimeout(() => {
+          updateCartCount();
+        }, 100);
       }
     });
   });
@@ -196,6 +203,114 @@ function initCartResponsive() {
   }
 }
 
+// Hàm cập nhật số lượng giỏ hàng trên header
+function updateCartCount() {
+  const cartCountElement = document.querySelector(".cart-count");
+  if (!cartCountElement) return;
+
+  // Tính số loại sản phẩm từ bảng giỏ hàng
+  const cartRows = document.querySelectorAll(".cart-item-row");
+  let productTypesCount = cartRows.length;
+
+  if (productTypesCount > 0) {
+    cartCountElement.textContent =
+      productTypesCount > 99 ? "99+" : productTypesCount;
+    cartCountElement.style.display = "flex";
+
+    // Thêm animation
+    cartCountElement.style.animation = "none";
+    setTimeout(() => {
+      cartCountElement.style.animation = "cartCountPulse 0.3s ease-in-out";
+    }, 10);
+  } else {
+    cartCountElement.style.display = "none";
+  }
+}
+
+// Hàm cập nhật số lượng giỏ hàng từ session (cho các trang không phải cart)
+function updateCartCountFromSession() {
+  const cartCountElement = document.querySelector(".cart-count");
+  if (!cartCountElement) return;
+
+  // Lấy số lượng từ data attribute hoặc tính từ các element có sẵn
+  const cartItems = document.querySelectorAll("[data-cart-item]");
+  let count = 0;
+
+  if (cartItems.length > 0) {
+    count = cartItems.length;
+  } else {
+    // Fallback: kiểm tra các element khác có thể chứa thông tin giỏ hàng
+    const cartBadges = document.querySelectorAll(
+      ".cart-badge, .cart-item-count"
+    );
+    if (cartBadges.length > 0) {
+      count = parseInt(cartBadges[0].textContent) || 0;
+    }
+  }
+
+  if (count > 0) {
+    cartCountElement.textContent = count > 99 ? "99+" : count;
+    cartCountElement.style.display = "flex";
+  } else {
+    cartCountElement.style.display = "none";
+  }
+}
+
+// Hàm xử lý chọn số lượng sản phẩm trong trang chi tiết
+function initQuantitySelector() {
+  const quantityDown = document.querySelector(".quantity-down");
+  const quantityUp = document.querySelector(".quantity-up");
+  const quantityInput = document.querySelector(".quantity-input");
+
+  if (quantityDown && quantityUp && quantityInput) {
+    // Xử lý nút giảm số lượng
+    quantityDown.addEventListener("click", function () {
+      const currentValue = parseInt(quantityInput.value);
+      const minValue = parseInt(quantityInput.min);
+
+      if (currentValue > minValue) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+
+    // Xử lý nút tăng số lượng
+    quantityUp.addEventListener("click", function () {
+      const currentValue = parseInt(quantityInput.value);
+      const maxValue = parseInt(quantityInput.max);
+
+      if (currentValue < maxValue) {
+        quantityInput.value = currentValue + 1;
+      }
+    });
+
+    // Xử lý input số lượng (cho phép nhập trực tiếp)
+    quantityInput.addEventListener("input", function () {
+      let value = parseInt(this.value) || 0;
+      const min = parseInt(this.min);
+      const max = parseInt(this.max);
+
+      // Đảm bảo giá trị hợp lệ
+      if (isNaN(value) || value < min) {
+        value = min;
+      } else if (value > max) {
+        value = max;
+      }
+
+      this.value = value;
+    });
+
+    // Xử lý khi focus vào input
+    quantityInput.addEventListener("focus", function () {
+      this.removeAttribute("readonly");
+    });
+
+    // Xử lý khi blur khỏi input
+    quantityInput.addEventListener("blur", function () {
+      this.setAttribute("readonly", "readonly");
+    });
+  }
+}
+
 // Khởi tạo slideshow cho các khối khi trang đã load
 document.addEventListener("DOMContentLoaded", function () {
   // Sản phẩm hot
@@ -208,5 +323,13 @@ document.addEventListener("DOMContentLoaded", function () {
     initCart();
     initCartForm();
     initCartResponsive();
+  }
+
+  // Cập nhật số lượng giỏ hàng trên tất cả các trang
+  updateCartCountFromSession();
+
+  // Khởi tạo chọn số lượng nếu đang ở trang chi tiết sản phẩm
+  if (document.querySelector(".quantity-selector")) {
+    initQuantitySelector();
   }
 });

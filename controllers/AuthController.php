@@ -28,24 +28,24 @@ class AuthController
             if (empty($password)) $errors[] = "Mật khẩu không được để trống";
             if (empty($phone_number)) $errors[] = "Số điện thoại không được để trống";
 
-            // Validate email format
             if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors[] = "Email không đúng định dạng";
             }
 
-            // Kiểm tra email đã tồn tại chưa
             if (!empty($email) && $this->modelUser->emailExists(email: $email)) {
                 $errors[] = "Email đã tồn tại trong hệ thống";
             }
 
-            // Validate password strength
             if (!empty($password) && strlen($password) < 6) {
                 $errors[] = "Mật khẩu phải có ít nhất 6 ký tự";
             }
 
-            // Validate phone number
             if (!empty($phone_number) && !preg_match('/^[0-9]{10,11}$/', $phone_number)) {
                 $errors[] = "Số điện thoại không đúng định dạng";
+            }
+
+            if (!empty($phone_number) && $this->modelUser->phoneNumberExists($phone_number)) {
+                $errors[] = "Số điện thoại đã tồn tại trong hệ thống";
             }
 
             if (empty($errors)) {
