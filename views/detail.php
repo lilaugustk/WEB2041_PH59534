@@ -35,7 +35,7 @@
     <div class="comment-section">
         <h3>Bình luận & Đánh giá</h3>
 
-        <!-- Form to add a new comment -->
+        <!-- Form để thêm bình luận -->
         <div class="add-comment-box">
             <?php if (isset($_SESSION['user'])) : ?>
                 <form action="?act=post-comment" method="POST">

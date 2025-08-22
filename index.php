@@ -1,5 +1,4 @@
 <?php
-// Require toàn bộ các file khai báo môi trường, thực thi,...(không require view)
 
 // Require file Common
 require_once './commons/env.php'; // Khai báo biến môi trường
@@ -12,7 +11,6 @@ require_once './controllers/DashboardController.php'; // Controller xử lý đ�
 
 
 // Require toàn bộ file Models
-
 require_once './models/ProductModel.php';
 require_once './models/CategoryModel.php';
 require_once './models/UserModel.php'; // Model xử lý người dùng
@@ -47,7 +45,6 @@ match ($action) {
     // Chỉnh sửa sản phẩm, danh mục
     'edit-product' => (new DashboardController())->editProduct(),
     'edit-category' => (new DashboardController())->editCategory(),
-    // 'edit-user' => (new DashboardController())->editUser(),
     'view-user' => (new DashboardController())->viewUser(),
 
     // Xử lý lưu sản phẩm, danh mục
