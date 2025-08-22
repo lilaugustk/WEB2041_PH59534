@@ -352,7 +352,6 @@ body {
   padding: 8px 12px;
   font-size: 0.85rem;
 }
-
 /* Tables */
 .table-container {
   background: white;
@@ -432,6 +431,11 @@ body {
 .data-table td a:hover {
   color: #70908b;
   text-decoration: underline;
+}
+
+/* Tắt gạch chân cho các nút trong bảng */
+.data-table td a.btn:hover {
+  text-decoration: none;
 }
 .status-badge.status-pending {
   background-color: #fff3cd;
